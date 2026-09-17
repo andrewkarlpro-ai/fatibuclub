@@ -16,19 +16,18 @@
   --color-elevated: #161829;
   --color-raised: #1c1f33;
 
-  /* Distinct per-section backgrounds — Halo-Lab-style color blocking.
-     Each section owns a tinted dark so the page reads as a rhythmic
-     sequence of contrasting blocks rather than one flat field. */
+  /* Per-section backgrounds — alternating light/dark for dramatic rhythm.
+     Halo-Lab-style: bright light sections punctuate the deep dark ones. */
   --color-sec-hero: #080914;        /* near-black, base */
-  --color-sec-philosophy: #0d0c1a;  /* warm dark */
-  --color-sec-stats: #12121f;      /* elevated purple-dark */
-  --color-sec-timeline: #0a0b16;   /* deeper near-black */
+  --color-sec-philosophy: #f3efe6;  /* LIGHT warm cream */
+  --color-sec-stats: #12121f;       /* elevated purple-dark */
+  --color-sec-timeline: #efeae0;    /* LIGHT warm off-white */
   --color-sec-engagement: #100a24;  /* deep purple */
-  --color-sec-committee: #14110a;   /* warm amber-dark */
-  --color-sec-operate: #08131a;    /* deep teal */
-  --color-sec-voices: #13080f;     /* deep rose */
-  --color-sec-contact: #0b0a1c;    /* indigo-dark */
-  --color-sec-footer: #05060d;     /* deepest */
+  --color-sec-committee: #f5f1e8;   /* LIGHT cream */
+  --color-sec-operate: #08131a;     /* deep teal */
+  --color-sec-voices: #f1ece2;      /* LIGHT warm white */
+  --color-sec-contact: #0b0a1c;     /* indigo-dark */
+  --color-sec-footer: #05060d;      /* deepest */
   --color-ink: #f5f3ee;
   --color-ink-muted: #a8aab6;
   --color-ink-faint: #6b6e80;
@@ -38,6 +37,14 @@
   --color-cream-deep: #e0bd4f;
   --color-line: rgba(245, 243, 238, 0.1);
   --color-line-strong: rgba(245, 243, 238, 0.18);
+
+  /* Light-mode equivalents (for the light sections) */
+  --color-ink-light: #14121a;            /* near-black text on light */
+  --color-ink-muted-light: #56546a;      /* muted gray on light */
+  --color-ink-faint-light: #8a8898;      /* faint gray on light */
+  --color-line-light: rgba(20, 18, 26, 0.1);
+  --color-line-strong-light: rgba(20, 18, 26, 0.18);
+  --color-cream-ink: #6b4f10;            /* dark gold for cream text on light */
 
   /* shadcn-compatible mappings (kept dark) */
   --color-background: var(--color-bg);
@@ -94,6 +101,126 @@
 .sec-voices { background-color: var(--color-sec-voices); }
 .sec-contact { background-color: var(--color-sec-contact); }
 .sec-footer { background-color: var(--color-sec-footer); }
+
+/* Light-section helpers — dark text + light borders/surfaces
+   so content reads correctly on the bright backgrounds. */
+.sec-philosophy,
+.sec-timeline,
+.sec-committee,
+.sec-voices {
+  color: var(--color-ink-light);
+}
+.sec-philosophy .text-ink,
+.sec-timeline .text-ink,
+.sec-committee .text-ink,
+.sec-voices .text-ink { color: var(--color-ink-light) !important; }
+.sec-philosophy .text-ink-muted,
+.sec-timeline .text-ink-muted,
+.sec-committee .text-ink-muted,
+.sec-voices .text-ink-muted { color: var(--color-ink-muted-light) !important; }
+.sec-philosophy .text-ink-faint,
+.sec-timeline .text-ink-faint,
+.sec-committee .text-ink-faint,
+.sec-voices .text-ink-faint { color: var(--color-ink-faint-light) !important; }
+/* cream/gold highlight text → darker gold on light backgrounds for contrast */
+.sec-philosophy .text-cream,
+.sec-timeline .text-cream,
+.sec-committee .text-cream,
+.sec-voices .text-cream { color: var(--color-cream-ink) !important; }
+.sec-philosophy .text-gradient-cream,
+.sec-timeline .text-gradient-cream,
+.sec-committee .text-gradient-cream,
+.sec-voices .text-gradient-cream {
+  background: linear-gradient(180deg, #b07d18 0%, #6b4f10 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* gradient text needs darker stops on light bg */
+.sec-philosophy .text-gradient-ink,
+.sec-timeline .text-gradient-ink,
+.sec-committee .text-gradient-ink,
+.sec-voices .text-gradient-ink {
+  background: linear-gradient(180deg, #14121a 0%, #3a3650 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* borders: switch from white-alpha to dark-alpha on light sections */
+.sec-philosophy .border-line,
+.sec-timeline .border-line,
+.sec-committee .border-line,
+.sec-voices .border-line { border-color: var(--color-line-light); }
+.sec-philosophy .border-line-strong,
+.sec-timeline .border-line-strong,
+.sec-committee .border-line-strong,
+.sec-voices .border-line-strong { border-color: var(--color-line-strong-light); }
+/* eyebrow label color adapts */
+.sec-philosophy .eyebrow,
+.sec-timeline .eyebrow,
+.sec-committee .eyebrow,
+.sec-voices .eyebrow { color: var(--color-ink-muted-light); }
+/* surface cards on light sections: white-ish panels */
+.sec-philosophy .surface-card,
+.sec-timeline .surface-card,
+.sec-committee .surface-card,
+.sec-voices .surface-card {
+  background:
+    linear-gradient(180deg, rgba(20,18,26,0.03) 0%, rgba(20,18,26,0.01) 100%),
+    #ffffff;
+  border: 1px solid var(--color-line-light);
+}
+/* dark-surface chips/cards on light sections → invert to subtle gray */
+.sec-philosophy .bg-surface,
+.sec-timeline .bg-surface,
+.sec-committee .bg-surface,
+.sec-voices .bg-surface {
+  background-color: rgba(20,18,26,0.05);
+}
+.sec-philosophy .bg-surface\/50,
+.sec-timeline .bg-surface\/50,
+.sec-committee .bg-surface\/50,
+.sec-voices .bg-surface\/50 {
+  background-color: rgba(20,18,26,0.04);
+}
+/* pills / chips hover text */
+.sec-philosophy .hover\:text-ink:hover,
+.sec-timeline .hover\:text-ink:hover,
+.sec-committee .hover\:text-ink:hover,
+.sec-voices .hover\:text-ink:hover { color: var(--color-ink-light); }
+/* pills / chips hover border on light */
+.sec-philosophy .hover\:border-line-strong:hover,
+.sec-timeline .hover\:border-line-strong:hover,
+.sec-committee .hover\:border-line-strong:hover,
+.sec-voices .hover\:border-line-strong:hover { border-color: var(--color-line-strong-light); }
+/* accent-tinted badge borders/text on light → use darker accents */
+.sec-philosophy .border-cream\/30,
+.sec-timeline .border-cream\/30,
+.sec-committee .border-cream\/30,
+.sec-voices .border-cream\/30 { border-color: rgba(107,79,16,0.35); }
+.sec-philosophy .border-accent\/30,
+.sec-timeline .border-accent\/30,
+.sec-committee .border-accent\/30,
+.sec-voices .border-accent\/30 { border-color: rgba(99,91,255,0.4); }
+.sec-philosophy .text-accent-soft,
+.sec-timeline .text-accent-soft,
+.sec-committee .text-accent-soft,
+.sec-voices .text-accent-soft { color: var(--color-accent) !important; }
+/* attribution avatar circle (bg-bg) on light → light surface */
+.sec-philosophy .bg-bg,
+.sec-timeline .bg-bg,
+.sec-committee .bg-bg,
+.sec-voices .bg-bg { background-color: #ffffff; }
+/* faded giant quotation-mark graphic on light */
+.sec-voices .text-cream\/20 { color: rgba(107,79,16,0.18) !important; }
+.sec-voices .text-accent\/25 { color: rgba(99,91,255,0.2) !important; }
+/* big outline SectionNumber strokes → darker on light */
+.sec-philosophy .text-transparent,
+.sec-timeline .text-transparent,
+.sec-committee .text-transparent,
+.sec-voices .text-transparent {
+  -webkit-text-stroke: 1.5px rgba(20,18,26,0.22) !important;
+}
 
 @layer base {
   * {

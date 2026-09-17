@@ -119,3 +119,38 @@ Stage Summary:
 - Each section now has its own distinct dark background color, creating Halo-Lab-style color blocking / visual rhythm down the page.
 - Hero avatars retained.
 - Site remains cohesive via consistent typography, spacing, and the recurring card/panel style.
+
+---
+Task ID: 17
+Agent: main
+Task: Replace all-deep palette with alternating LIGHT + DARK sections (Halo-Lab-style dramatic rhythm).
+
+Work Log:
+- User feedback: "I dont like how all sections color is deep. Use light color in some sections."
+- Redesigned section palette to alternate: Hero(dark) → Philosophy(LIGHT) → Stats(dark) → Timeline(LIGHT) → Engagement(dark) → Committee(LIGHT) → How We Operate(dark) → Voices(LIGHT) → Contact(dark) → Footer(dark).
+- New light section backgrounds: Philosophy #f3efe6, Timeline #efeae0, Committee #f5f1e8, Voices #f1ece2 (warm cream/off-white).
+- Added light-mode tokens: --color-ink-light (#14121a), --color-ink-muted-light (#56546a), --color-ink-faint-light, --color-line-light, --color-line-strong-light, --color-cream-ink (#6b4f10 dark gold).
+- Added a comprehensive set of scoped CSS overrides (.sec-philosophy/.sec-timeline/.sec-committee/.sec-voices ...) that adapt nested elements to light backgrounds:
+  * text-ink / text-ink-muted / text-ink-faint → dark variants (with !important to beat Tailwind utilities)
+  * text-cream (gold highlights) → dark gold #6b4f10 for contrast
+  * text-gradient-ink / text-gradient-cream → darker gradient stops
+  * border-line / border-line-strong → dark-alpha borders
+  * surface-card → white panels with dark-alpha borders
+  * bg-surface / bg-surface/50 chips → subtle gray on light
+  * accent badges (border-cream/30, text-accent-soft) → darker accent variants
+  * attribution avatar circles (bg-bg) → white on light
+  * faded quotation-mark graphics → dark-alpha tints
+  * outline SectionNumber strokes → darker
+- Fixed a CSS parse error caused by an escaped bracket selector (.text-white\/\[0.025\]) that crashed compilation.
+
+Verification (agent-browser + VLM):
+- Confirmed per-section background rgb: hero 8,9,20 (dark) / philosophy 243,239,230 (LIGHT) / stats 18,18,31 (dark) / timeline 239,234,224 (LIGHT) / engagement 16,10,36 (dark) / committee 245,241,232 (LIGHT) / operate 8,19,26 (dark) / voices 241,236,226 (LIGHT) / contact 11,10,28 (dark) / footer 5,6,13 (dark).
+- VLM on all 4 light sections (Philosophy, Timeline, Committee, Voices) after fixes: all "OK" — text dark and readable, cards/borders/badges clearly visible, no washed-out text, gold highlights now dark-gold with good contrast.
+- Final full-page VLM: "Visual system production-ready, achieves sophisticated Halo-Lab aesthetic perfectly. Clear dramatic light/dark alternation. Text readability excellent on both modes. Premium dark sections maintained." (The "empty sections / 0+ stats" notes were full-page-screenshot artifacts at scroll 0; individually verified all content present + stats count up 21,000+/2,000+/150+/15.)
+- No mobile horizontal overflow. ESLint clean. Dev server healthy (GET / 200).
+
+Stage Summary:
+- Sections now alternate LIGHT and DARK for dramatic visual rhythm instead of being uniformly deep.
+- 4 light sections (Philosophy, Timeline, Committee, Voices) use warm cream/off-white backgrounds with dark text, dark-alpha borders, white surface cards, and dark-gold accents.
+- 6 dark sections (Hero, Stats, Engagement, How We Operate, Contact, Footer) retain the deep premium palette.
+- All text fully readable on both modes; cohesion maintained via consistent typography/spacing/card system.
