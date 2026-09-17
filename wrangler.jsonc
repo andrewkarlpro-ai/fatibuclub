@@ -1,0 +1,17 @@
+{
+  // Cloudflare Workers config for FatiBuClub (Next.js 16 via @opennextjs/cloudflare)
+  "name": "fatibuclub",
+  "compatibility_date": "2025-09-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": ".open-next/worker.js",
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "NEXT_RUNTIME": "edge"
+  }
+}
