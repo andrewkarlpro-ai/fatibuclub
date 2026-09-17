@@ -1,13 +1,11 @@
 "use client";
 
 import { Reveal } from "./primitives";
-import { EditorialImage, Atmosphere } from "./editorial-image";
 import { DividerLine } from "./philosophy";
 
 export function Engagement() {
   return (
-    <section className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
-      <Atmosphere tint="purple" position="right" opacity={30} />
+    <section className="sec-engagement relative overflow-hidden py-24 sm:py-32 lg:py-40">
       <DividerLine />
       <div className="mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
         <div className="flex items-center gap-4">
@@ -27,23 +25,9 @@ export function Engagement() {
           </h2>
         </Reveal>
 
-        {/* content grid */}
+        {/* content grid — paragraph + 150 panel */}
         <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-12">
-          {/* manuscript image — the text itself */}
-          <Reveal className="lg:col-span-5" delay={0.05}>
-            <EditorialImage
-              src="/images/engagement-manuscript.jpg"
-              alt="An open book with pages fanning upward, dramatically lit against a dark background — the text at the center of high-signal engagement."
-              ratio="aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5]"
-              tint="purple"
-              overlay={50}
-              label="The Text"
-            />
-          </Reveal>
-
-          {/* paragraph + 150 panel stacked */}
-          <div className="flex flex-col gap-5 lg:col-span-7">
-          <Reveal className="surface-card rounded-2xl p-8 sm:p-10 lg:p-12" delay={0.08}>
+          <Reveal className="surface-card rounded-2xl p-8 sm:p-10 lg:col-span-7 lg:p-12" delay={0.05}>
             <p className="max-w-xl text-[15px] leading-relaxed text-ink-muted sm:text-[17px]">
               Our community thrives on rigorous, authentic feedback. Through our
               private channels and active social salons, we generate consistent,
@@ -72,7 +56,7 @@ export function Engagement() {
           </Reveal>
 
           {/* 150+ with network */}
-          <Reveal className="relative overflow-hidden rounded-2xl border border-line bg-bg p-8 sm:p-10 lg:p-12" delay={0.12}>
+          <Reveal className="relative overflow-hidden rounded-2xl border border-line bg-bg/40 p-8 sm:p-10 lg:col-span-5 lg:p-12" delay={0.12}>
             <NetworkBackdrop />
             <div className="relative flex h-full flex-col justify-between">
               <span className="eyebrow">Benchmark</span>
@@ -94,7 +78,6 @@ export function Engagement() {
               </div>
             </div>
           </Reveal>
-          </div>
         </div>
       </div>
     </section>

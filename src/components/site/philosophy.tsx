@@ -1,13 +1,13 @@
 "use client";
 
 import { Reveal, SectionNumber } from "./primitives";
-import { EditorialImage, Atmosphere } from "./editorial-image";
 
 export function Philosophy() {
   return (
-    <section id="about" className="anchor relative overflow-hidden py-24 sm:py-32 lg:py-40">
-      <Atmosphere tint="amber" position="left" opacity={28} />
-      {/* decorative animated divider at top */}
+    <section
+      id="about"
+      className="sec-philosophy anchor relative overflow-hidden py-24 sm:py-32 lg:py-40"
+    >
       <DividerLine />
 
       <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:px-12">
@@ -15,7 +15,7 @@ export function Philosophy() {
         <div className="lg:col-span-5">
           <Reveal>
             <span className="eyebrow inline-flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+              <span className="h-1.5 w-1.5 rounded-full bg-cream" />
               Our Foundation
             </span>
           </Reveal>
@@ -43,7 +43,7 @@ export function Philosophy() {
             <div className="relative">
               <span
                 aria-hidden
-                className="absolute -left-6 top-2 hidden font-display text-[120px] leading-none text-amber-400/30 lg:block"
+                className="absolute -left-6 top-2 hidden font-display text-[120px] leading-none text-cream/25 lg:block"
               >
                 &ldquo;
               </span>
@@ -86,36 +86,6 @@ export function Philosophy() {
             </div>
           </Reveal>
         </div>
-      </div>
-
-      {/* Editorial image band — the literary archive */}
-      <div className="mx-auto mt-16 max-w-[1320px] px-5 sm:px-8 lg:mt-20 lg:px-12">
-        <Reveal delay={0.1}>
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-8">
-              <EditorialImage
-                src="/images/philosophy-library.jpg"
-                alt="A dimly lit bookstore interior with sunlight streaming through a large window — the kind of overlooked place where meaningful literary work is found."
-                ratio="aspect-[16/10] sm:aspect-[16/8]"
-                tint="amber"
-                overlay={55}
-                label="The Archive"
-              />
-            </div>
-            <div className="lg:col-span-4 lg:pl-4">
-              <p className="text-[13px] uppercase tracking-[0.18em] text-amber-400/90">
-                Overlooked places
-              </p>
-              <p className="mt-3 font-display text-lg font-medium leading-snug text-ink">
-                Uncovering meaningful ingredients in overlooked places.
-              </p>
-              <p className="mt-3 text-[14px] leading-relaxed text-ink-muted">
-                We scout the quiet shelves, the independent presses, the
-                manuscripts that deserve a legacy spotlight.
-              </p>
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

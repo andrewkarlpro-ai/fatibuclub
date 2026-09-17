@@ -14,7 +14,7 @@ const FOOTER_NAV = [
 
 export function Footer() {
   return (
-    <footer className="relative mt-auto overflow-hidden border-t border-line bg-bg-2">
+    <footer className="sec-footer relative mt-auto overflow-hidden border-t border-line">
       <div
         aria-hidden
         className="pointer-events-none absolute -bottom-40 left-1/2 h-[420px] w-[820px] -translate-x-1/2 aura-accent opacity-20"

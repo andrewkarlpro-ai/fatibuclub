@@ -5,7 +5,6 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./primitives";
 import { ArrowNudge, Card } from "./ui-atoms";
-import { EditorialImage, Atmosphere } from "./editorial-image";
 import { DividerLine } from "./philosophy";
 import { Loader2, Check } from "lucide-react";
 
@@ -73,11 +72,15 @@ export function ContactForm() {
   return (
     <section
       id="contact"
-      className="anchor relative overflow-hidden py-24 sm:py-32 lg:py-40"
+      className="sec-contact anchor relative overflow-hidden py-24 sm:py-32 lg:py-40"
     >
       <DividerLine />
 
-      <Atmosphere tint="purple" position="center" opacity={24} />
+      {/* ambient glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 aura-accent opacity-20"
+      />
 
       <div className="mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
@@ -115,18 +118,6 @@ export function ContactForm() {
                   15 standout authors per annual cycle.
                 </span>
               </div>
-            </Reveal>
-
-            {/* quill — editorial visual */}
-            <Reveal delay={0.22} className="mt-8 hidden sm:block">
-              <EditorialImage
-                src="/images/contact-quill.jpg"
-                alt="A black feather quill resting on an antique book with aged pages of old handwriting — the act of submission for committee consideration."
-                ratio="aspect-[4/3]"
-                tint="purple"
-                overlay={50}
-                label="The Submission"
-              />
             </Reveal>
           </div>
 

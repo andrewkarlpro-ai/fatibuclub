@@ -1,7 +1,6 @@
 "use client";
 
 import { Reveal } from "./primitives";
-import { EditorialImage, Atmosphere } from "./editorial-image";
 import { DividerLine } from "./philosophy";
 
 const VOICES = [
@@ -25,10 +24,9 @@ export function Voices() {
   return (
     <section
       id="voices"
-      className="anchor relative overflow-hidden py-24 sm:py-32 lg:py-40"
+      className="sec-voices anchor relative overflow-hidden py-24 sm:py-32 lg:py-40"
     >
       <DividerLine />
-      <Atmosphere tint="rose" position="right" opacity={22} />
       <div className="mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -71,20 +69,6 @@ export function Voices() {
             </Reveal>
           ))}
         </div>
-
-        {/* handwritten letter — editorial visual */}
-        <Reveal delay={0.1}>
-          <div className="mt-5">
-            <EditorialImage
-              src="/images/voices-letter.jpg"
-              alt="An aged yellowed handwritten letter with cursive script in warm sunlight — the authentic, high-signal commentary the salon cultivates."
-              ratio="aspect-[21/8]"
-              tint="rose"
-              overlay={55}
-              label="Authentic Commentary"
-            />
-          </div>
-        </Reveal>
       </div>
     </section>
   );

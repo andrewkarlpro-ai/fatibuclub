@@ -37,7 +37,7 @@ export function Hero() {
     <section
       id="top"
       onMouseMove={onMove}
-      className="grain relative flex min-h-[100svh] items-center overflow-hidden pb-20 pt-28 sm:pt-32"
+      className="sec-hero grain relative flex min-h-[100svh] items-center overflow-hidden pb-20 pt-28 sm:pt-32"
     >
       {/* background atmospherics */}
       <div aria-hidden className="pointer-events-none absolute inset-0">

@@ -87,3 +87,35 @@ Stage Summary:
 - Hero Selection Cycle card shows 3 real profile-picture avatars representing the selection committee members.
 - All images are watermark-free and thematically relevant to a private literary society.
 - Site remains cohesive as one continuous visual narrative despite the per-section color variation.
+
+---
+Task ID: 16
+Agent: main
+Task: Remove all section images (not relevant) + apply distinct background color per section (Halo-Lab-style color blocking).
+
+Work Log:
+- Removed EditorialImage usages + image imports from: philosophy, engagement, committee, how-we-operate, voices, contact-form.
+- Deleted the 6 section image files (kept only av1/av2/av3.jpg for the hero card).
+- Deleted the editorial-image.tsx component.
+- Added 10 distinct per-section background color tokens to globals.css (--color-sec-*):
+  * Hero #080914 (near-black) | Philosophy #0d0c1a (warm dark) | Stats #12121f (elevated purple-dark)
+  * Timeline #0a0b16 (deeper near-black) | Engagement #100a24 (deep purple) | Committee #14110a (warm amber-dark)
+  * How We Operate #08131a (deep teal) | Voices #13080f (deep rose) | Contact #0b0a1c (indigo-dark) | Footer #05060d (deepest)
+- Created .sec-* plain CSS classes (outside @layer so Tailwind v4 doesn't purge them) and applied one to each section.
+- Kept the 3 profile avatars in the hero Selection Cycle card (separate prior request).
+- Restored the original surface-card / bg-bg /40 treatments for inner cards so they sit correctly on each tinted section.
+
+Verification (agent-browser + VLM):
+- Confirmed via getComputedStyle: each section now renders a DISTINCT background rgb (hero 8,9,20 / philosophy 13,12,26 / stats 18,18,31 / timeline 10,11,22 / engagement 16,10,36 / committee 20,17,10 / operate 8,19,26 / voices 19,8,15 / contact 11,10,28 / footer 5,6,13).
+- Only 3 <img> remain on the page (the avatars); all section photographs removed.
+- No mobile horizontal overflow (390px).
+- Stats count-up animation still works (21,000+ / 2,000+ / 150+ / 15) when scrolled into view.
+- Timeline + Voices content confirmed visible against their distinct backgrounds.
+- Final VLM: "PASS — 9 sections display clear distinct background shifts... alternating warm/cool palette creates sophisticated Halo-Lab editorial rhythm. Each section feels like a distinct chapter. Text readability excellent (>7:1). 3 avatars still present."
+- ESLint clean; dev server healthy (GET / 200).
+
+Stage Summary:
+- All section photographs removed per user feedback ("not relevant").
+- Each section now has its own distinct dark background color, creating Halo-Lab-style color blocking / visual rhythm down the page.
+- Hero avatars retained.
+- Site remains cohesive via consistent typography, spacing, and the recurring card/panel style.

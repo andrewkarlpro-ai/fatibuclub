@@ -1,7 +1,6 @@
 "use client";
 
 import { Reveal, useCountUp } from "./primitives";
-import { Atmosphere } from "./editorial-image";
 import { DividerLine } from "./philosophy";
 
 type Stat = {
@@ -40,9 +39,8 @@ const STATS: Stat[] = [
 
 export function Stats() {
   return (
-    <section className="relative overflow-hidden py-24 sm:py-28 lg:py-32">
+    <section className="sec-stats relative overflow-hidden py-24 sm:py-28 lg:py-32">
       <DividerLine />
-      <Atmosphere tint="cream" position="center" opacity={18} />
       <div className="mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
           {STATS.map((s, i) => (
@@ -61,7 +59,7 @@ function StatCell({ stat, index }: { stat: Stat; index: number }) {
   });
 
   return (
-    <div className="group relative bg-bg p-8 transition-colors duration-500 hover:bg-surface/60 sm:p-10 lg:p-12">
+    <div className="sec-stats group relative p-8 transition-colors duration-500 hover:bg-surface/60 sm:p-10 lg:p-12">
       <div className="absolute right-6 top-6 font-display text-[11px] tabular-nums text-ink-faint">
         0{index + 1}
       </div>

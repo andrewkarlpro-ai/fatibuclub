@@ -15,6 +15,20 @@
   --color-surface: #111322;
   --color-elevated: #161829;
   --color-raised: #1c1f33;
+
+  /* Distinct per-section backgrounds — Halo-Lab-style color blocking.
+     Each section owns a tinted dark so the page reads as a rhythmic
+     sequence of contrasting blocks rather than one flat field. */
+  --color-sec-hero: #080914;        /* near-black, base */
+  --color-sec-philosophy: #0d0c1a;  /* warm dark */
+  --color-sec-stats: #12121f;      /* elevated purple-dark */
+  --color-sec-timeline: #0a0b16;   /* deeper near-black */
+  --color-sec-engagement: #100a24;  /* deep purple */
+  --color-sec-committee: #14110a;   /* warm amber-dark */
+  --color-sec-operate: #08131a;    /* deep teal */
+  --color-sec-voices: #13080f;     /* deep rose */
+  --color-sec-contact: #0b0a1c;    /* indigo-dark */
+  --color-sec-footer: #05060d;     /* deepest */
   --color-ink: #f5f3ee;
   --color-ink-muted: #a8aab6;
   --color-ink-faint: #6b6e80;
@@ -67,6 +81,19 @@
 :root {
   --radius: 20px;
 }
+
+/* Per-section background colors — plain classes so they always apply.
+   Halo-Lab-style color blocking: each section owns a tinted dark. */
+.sec-hero { background-color: var(--color-sec-hero); }
+.sec-philosophy { background-color: var(--color-sec-philosophy); }
+.sec-stats { background-color: var(--color-sec-stats); }
+.sec-timeline { background-color: var(--color-sec-timeline); }
+.sec-engagement { background-color: var(--color-sec-engagement); }
+.sec-committee { background-color: var(--color-sec-committee); }
+.sec-operate { background-color: var(--color-sec-operate); }
+.sec-voices { background-color: var(--color-sec-voices); }
+.sec-contact { background-color: var(--color-sec-contact); }
+.sec-footer { background-color: var(--color-sec-footer); }
 
 @layer base {
   * {
@@ -238,6 +265,17 @@
   .anchor {
     scroll-margin-top: 96px;
   }
+
+  /* Soft gradient blend between two section backgrounds — used as a
+     thin transition strip so color blocks meet gracefully. */
+  .blend-down-hero { background: linear-gradient(180deg, var(--color-sec-hero) 0%, var(--color-sec-philosophy) 100%); }
+  .blend-down-philosophy { background: linear-gradient(180deg, var(--color-sec-philosophy) 0%, var(--color-sec-stats) 100%); }
+  .blend-down-stats { background: linear-gradient(180deg, var(--color-sec-stats) 0%, var(--color-sec-timeline) 100%); }
+  .blend-down-timeline { background: linear-gradient(180deg, var(--color-sec-timeline) 0%, var(--color-sec-engagement) 100%); }
+  .blend-down-engagement { background: linear-gradient(180deg, var(--color-sec-engagement) 0%, var(--color-sec-committee) 100%); }
+  .blend-down-committee { background: linear-gradient(180deg, var(--color-sec-committee) 0%, var(--color-sec-operate) 100%); }
+  .blend-down-operate { background: linear-gradient(180deg, var(--color-sec-operate) 0%, var(--color-sec-voices) 100%); }
+  .blend-down-voices { background: linear-gradient(180deg, var(--color-sec-voices) 0%, var(--color-sec-contact) 100%); }
 
   /* Marquee */
   @keyframes marquee {
