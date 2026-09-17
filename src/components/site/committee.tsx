@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "./primitives";
+import { EditorialImage, Atmosphere } from "./editorial-image";
 import { DividerLine } from "./philosophy";
 
 export function Committee() {
@@ -11,11 +12,7 @@ export function Committee() {
     >
       <DividerLine />
 
-      {/* ambient glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-[5%] top-1/3 h-[520px] w-[520px] aura-accent opacity-30"
-      />
+      <Atmosphere tint="cream" position="right" opacity={26} />
 
       <div className="mx-auto mt-20 grid max-w-[1320px] grid-cols-1 gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:px-12">
         {/* LEFT — giant stacked type */}
@@ -101,6 +98,20 @@ export function Committee() {
             </div>
           </Reveal>
         </div>
+      </div>
+
+      {/* Reading room — editorial visual */}
+      <div className="mx-auto mt-16 max-w-[1320px] px-5 sm:px-8 lg:mt-20 lg:px-12">
+        <Reveal delay={0.1}>
+          <EditorialImage
+            src="/images/committee-library.jpg"
+            alt="A grand two-story vintage library with dark wooden bookshelves and a spiral staircase — the kind of room where the Selection Committee meets the rare few."
+            ratio="aspect-[16/9] sm:aspect-[21/8]"
+            tint="cream"
+            overlay={55}
+            label="The Reading Room"
+          />
+        </Reveal>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import {
   motion,
   useMotionValue,
@@ -192,14 +193,24 @@ function EditorialCard({
       </p>
       <div className="mt-5 flex items-center justify-between border-t border-line pt-4">
         <span className="text-[12px] text-ink-muted">{meta}</span>
-        <div className="flex -space-x-1.5">
-          {[0, 1, 2].map((i) => (
-            <span
-              key={i}
-              className="h-5 w-5 rounded-full border border-surface bg-raised"
-              style={{ opacity: 1 - i * 0.2 }}
-            />
-          ))}
+        <div className="flex -space-x-2">
+          {["/images/av1.jpg", "/images/av2.jpg", "/images/av3.jpg"].map(
+            (src, i) => (
+              <span
+                key={src}
+                className="relative h-7 w-7 overflow-hidden rounded-full border-2 border-raised bg-raised"
+                style={{ zIndex: 3 - i }}
+              >
+                <Image
+                  src={src}
+                  alt={`Selection committee member ${i + 1}`}
+                  fill
+                  sizes="28px"
+                  className="object-cover"
+                />
+              </span>
+            )
+          )}
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@
 import * as React from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Reveal } from "./primitives";
+import { Atmosphere } from "./editorial-image";
 import { DividerLine } from "./philosophy";
 
 const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
@@ -41,6 +42,7 @@ export function Timeline() {
       className="anchor relative overflow-hidden py-24 sm:py-32 lg:py-40"
     >
       <DividerLine />
+      <Atmosphere tint="purple" position="left" opacity={22} />
       <div className="mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
         <div className="flex items-center gap-4">
           <span className="font-display text-sm font-medium text-cream tabular-nums">

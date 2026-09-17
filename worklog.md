@@ -52,3 +52,38 @@ Stage Summary:
 - Complete single-page FatiBuClub site delivered: Nav → Hero → Philosophy → Stats → Timeline → Engagement → Committee → How We Operate → Voices → Contact → Footer.
 - All factual content sourced from the original Croissants, Coffee & Tea site, rebranded to FatiBuClub. No invented facts/stats/team/contacts.
 - Dark editorial design system (#080914 base, #635BFF + #F4D77A accents, Space Grotesk + Inter), performant CSS/framer-motion animations, prefers-reduced-motion respected.
+
+---
+Task ID: 15
+Agent: main
+Task: Add distinct color/image per section + 3 profile avatars in hero Selection Cycle card.
+
+Work Log:
+- Used image-search skill (z-ai image-search) to find relevant literary/editorial images.
+- Downloaded 6 section images + 3 profile portraits to /public/images/.
+- Created reusable EditorialImage component (next/image, lazy-load, dark overlay, color tint wash, grain, hover zoom, corner label) and Atmosphere helper (radial color aura per section).
+- Hero EditorialCard: replaced abstract circles with 3 overlapping circular profile-picture avatars (av1/av2/av3.jpg) using next/image.
+- Per-section color identities (distinct aura tints):
+  * Philosophy → amber (library/bookstore photo, "The Archive")
+  * Stats → cream atmosphere
+  * Timeline → purple atmosphere
+  * Engagement → purple (manuscript/open-book photo, "The Text")
+  * Committee → cream (grand vintage library reading-room photo, "The Reading Room")
+  * How We Operate → teal (antique leather books photo, "The Archive"); accent border gradient teal→cream→purple
+  * Voices → rose (handwritten letter photo, "Authentic Commentary")
+  * Contact → purple (quill-by-candlelight photo, "The Submission")
+- Replaced 2 watermarked images: engagement (Dreamstime→Pexels open book), contact (123RF→Unsplash quill by candlelight). VLM confirmed all 6 section images now watermark-free.
+
+Verification (agent-browser + VLM):
+- All 9 images load successfully (3 avatars + 6 section photos), no broken images.
+- No horizontal overflow on mobile (390px) across any section.
+- Hero avatars: 3 circular overlapping profile pictures with real faces, styled with borders — confirmed on desktop + mobile.
+- Each section image integrates cleanly with dark overlay; text remains readable; color tints give distinct identity.
+- Final full-page VLM review: "PASS" on all 5 criteria (visual distinction, image relevance, avatars, no technical issues, cohesion). "No broken images, no watermarks, no layout breaks."
+- ESLint clean; dev server healthy (GET / 200).
+
+Stage Summary:
+- Each section now has a distinct color atmosphere + a relevant editorial photograph (library, manuscript, reading room, vintage books, handwritten letter, quill).
+- Hero Selection Cycle card shows 3 real profile-picture avatars representing the selection committee members.
+- All images are watermark-free and thematically relevant to a private literary society.
+- Site remains cohesive as one continuous visual narrative despite the per-section color variation.
