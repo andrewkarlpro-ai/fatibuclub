@@ -53,7 +53,7 @@ export function Committee() {
             <div className="surface-card rounded-2xl p-8 sm:p-10">
               <p className="text-[15px] leading-relaxed text-ink-muted sm:text-[17px]">
                 Our curation process is steered by{" "}
-                <span className="text-ink">Isolde V. Thorne</span>, Selection
+                <span className="text-ink">Prof. Waheed Heritage</span>, Selection
                 Committee Chair, alongside a dedicated team of literary
                 specialists, academic minds, and cultural curators. With deep
                 roots in narrative structure and community building, the
@@ -65,13 +65,13 @@ export function Committee() {
             </div>
           </Reveal>
 
-          {/* Isolde profile — abstract placeholder */}
+          {/* Chair profile — abstract placeholder */}
           <Reveal delay={0.14}>
             <div className="mt-5 flex items-center gap-5 rounded-2xl border border-line bg-surface/50 p-5 transition-colors hover:border-line-strong">
               <AbstractPortrait />
               <div className="min-w-0">
                 <p className="font-display text-lg font-medium text-ink">
-                  Isolde V. Thorne
+                  Prof. Waheed Heritage
                 </p>
                 <p className="mt-0.5 text-[13px] text-cream">
                   Selection Committee Chair
@@ -115,7 +115,7 @@ function AbstractPortrait() {
       <div className="absolute inset-0 bg-dots opacity-40" />
       <div className="absolute inset-0 flex items-center justify-center">
         <span className="font-display text-2xl font-semibold text-ink sm:text-[28px]">
-          IVT
+          WH
         </span>
       </div>
       <span className="absolute bottom-1 right-1.5 text-[8px] uppercase tracking-[0.15em] text-ink-faint">
