@@ -30,7 +30,7 @@ const STATS: Stat[] = [
     sub: "Consistent review velocity across major platforms.",
   },
   {
-    target: 15,
+    target: 18,
     suffix: "",
     label: "Standout Authors Per Annual Cycle",
     sub: "A deliberately limited, high-attention residency cohort.",

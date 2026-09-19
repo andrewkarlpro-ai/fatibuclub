@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Reveal } from "./primitives";
 import { DividerLine } from "./philosophy";
 
@@ -65,10 +66,10 @@ export function Committee() {
             </div>
           </Reveal>
 
-          {/* Chair profile — abstract placeholder */}
+          {/* Chair profile — real portrait */}
           <Reveal delay={0.14}>
             <div className="mt-5 flex items-center gap-5 rounded-2xl border border-line bg-surface/50 p-5 transition-colors hover:border-line-strong">
-              <AbstractPortrait />
+              <ChairPortrait />
               <div className="min-w-0">
                 <p className="font-display text-lg font-medium text-ink">
                   Prof. Waheed Heritage
@@ -106,21 +107,21 @@ export function Committee() {
   );
 }
 
-/* Abstract editorial portrait frame — NOT a real person.
-   Stylised monogram placeholder until an official portrait is provided. */
-function AbstractPortrait() {
+/* Real portrait of Prof. Waheed Heritage, Selection Committee Chair. */
+function ChairPortrait() {
   return (
     <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border border-line-strong sm:h-24 sm:w-24">
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-surface to-bg" />
-      <div className="absolute inset-0 bg-dots opacity-40" />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="font-display text-2xl font-semibold text-ink sm:text-[28px]">
-          WH
-        </span>
-      </div>
-      <span className="absolute bottom-1 right-1.5 text-[8px] uppercase tracking-[0.15em] text-ink-faint">
-        Abstract
-      </span>
+      <Image
+        src="/images/waheed-heritage.jpg"
+        alt="Portrait of Prof. Waheed Heritage, Selection Committee Chair of FatiBuClub."
+        fill
+        sizes="96px"
+        className="object-cover object-top"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10"
+      />
     </div>
   );
 }

@@ -113,7 +113,7 @@ export function Hero() {
               <EditorialCard
                 eyebrow="Selection Cycle"
                 title="2025 Annual Residency"
-                meta="15 standout authors"
+                meta="18 standout authors"
                 accent="cream"
               />
             </motion.div>

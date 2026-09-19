@@ -103,7 +103,7 @@ export function ContactForm() {
             <Reveal delay={0.12}>
               <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ink-muted sm:text-[17px]">
                 To maintain the exceptional quality of our high-signal social
-                salons, our infrastructure only accommodates 15 standout authors
+                salons, our infrastructure only accommodates 18 standout authors
                 per annual cycle. If you are an independent author whose work
                 aligns with our mission of uncovering meaningful ingredients in
                 overlooked places, please submit your contact and publication
@@ -115,7 +115,7 @@ export function ContactForm() {
               <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-cream/30 bg-cream/[0.06] px-4 py-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-cream" />
                 <span className="text-[13px] font-medium text-cream">
-                  15 standout authors per annual cycle.
+                  18 standout authors per annual cycle.
                 </span>
               </div>
             </Reveal>
