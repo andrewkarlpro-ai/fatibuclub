@@ -16,16 +16,17 @@
     // Non-secret config: the inbox that receives contact-form submissions.
     "DESTINATION_EMAIL": "fatibuclub@gmail.com",
     // Sender used by Resend. Must be on a verified domain in your Resend account.
-    // Falls back to onboarding@resend.dev if your domain isn't verified yet.
+    // onboarding@resend.dev works out of the box for testing until you verify a domain.
     "FROM_EMAIL": "FatiBuClub <onboarding@resend.dev>"
-  },
-  // D1 database for persistent submission storage.
-  // database_id is filled in after `wrangler d1 create fatibuclub`.
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "fatibuclub",
-      "database_id": "REPLACE_AFTER_D1_CREATE"
-    }
-  ]
+  }
+  // D1 database binding — re-enable after the Cloudflare API token is granted
+  // the "D1:Edit" scope and the database is created (`wrangler d1 create fatibuclub`).
+  // The /api/contact route already gracefully skips persistence when DB is absent.
+  // "d1_databases": [
+  //   {
+  //     "binding": "DB",
+  //     "database_name": "fatibuclub",
+  //     "database_id": "PASTE_REAL_ID_HERE"
+  //   }
+  // ]
 }
