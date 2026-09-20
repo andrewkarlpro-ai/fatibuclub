@@ -1,4 +1,8 @@
 import { NextResponse } from "next/server";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { Resend } from "resend";
+
+export const runtime = "nodejs";
 
 type ContactPayload = {
   name?: string;
@@ -8,6 +12,14 @@ type ContactPayload = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Bindings we expect on the Worker env (declared for type-safety).
+type AppEnv = {
+  DB: D1Database;
+  RESEND_API_KEY: string;
+  DESTINATION_EMAIL: string;
+  FROM_EMAIL: string;
+};
 
 export async function POST(request: Request) {
   let body: ContactPayload;
@@ -40,8 +52,50 @@ export async function POST(request: Request) {
     );
   }
 
-  // In a production deployment this would persist to a datastore and/or
-  // notify the Selection Committee. We acknowledge receipt here.
+  // Pull Cloudflare bindings (D1 + secrets + vars).
+  const { env } = await getCloudflareContext();
+  const appEnv = env as unknown as AppEnv;
+
+  // 1) Persist to D1 (if the binding is present).
+  let storedId: number | null = null;
+  if (appEnv.DB) {
+    try {
+      const result = await appEnv.DB.prepare(
+        `INSERT INTO submissions (name, email, publication, message, created_at)
+         VALUES (?, ?, ?, ?, ?)`
+      )
+        .bind(name, email, publication, message, new Date().toISOString())
+        .run();
+      storedId = (result.meta as { last_row_id?: number })?.last_row_id ?? null;
+    } catch (err) {
+      // Log but do not fail the request — the email still goes out.
+      console.error("D1 insert failed:", err);
+    }
+  }
+
+  // 2) Email the submission to the Selection Committee inbox via Resend.
+  let emailDelivered = false;
+  if (appEnv.RESEND_API_KEY) {
+    try {
+      const resend = new Resend(appEnv.RESEND_API_KEY);
+      const to = appEnv.DESTINATION_EMAIL || "fatibuclub@gmail.com";
+      const from =
+        appEnv.FROM_EMAIL || "FatiBuClub <onboarding@resend.dev>";
+
+      await resend.emails.send({
+        from,
+        to,
+        subject: `New FatiBuClub submission — ${name}`,
+        replyTo: email,
+        html: renderEmailHtml({ name, email, publication, message, storedId }),
+        text: renderEmailText({ name, email, publication, message, storedId }),
+      });
+      emailDelivered = true;
+    } catch (err) {
+      console.error("Resend email failed:", err);
+    }
+  }
+
   return NextResponse.json({
     ok: true,
     message:
@@ -51,6 +105,68 @@ export async function POST(request: Request) {
       email,
       publication: !!publication,
       messageLength: message.length,
+      storedId,
+      emailed: emailDelivered,
     },
   });
+}
+
+/* ---- email templates ---- */
+function renderEmailHtml(p: {
+  name: string;
+  email: string;
+  publication: string;
+  message: string;
+  storedId: number | null;
+}) {
+  return `<!DOCTYPE html><html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0a1c;color:#f5f3ee;padding:32px 0;margin:0">
+  <div style="max-width:560px;margin:0 auto;background:#11132a;border:1px solid #2a2c4a;border-radius:16px;overflow:hidden">
+    <div style="padding:24px 28px;border-bottom:1px solid #2a2c4a">
+      <p style="margin:0;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#a8aab6">FatiBuClub · Selection Committee</p>
+      <h1 style="margin:8px 0 0;font-size:20px;color:#f5f3ee">New submission for committee consideration</h1>
+    </div>
+    <div style="padding:24px 28px">
+      ${field("Name", p.name)}
+      ${field("Email", p.email)}
+      ${field("Book / Publication", p.publication)}
+      ${field("Message", p.message)}
+      ${p.storedId ? field("D1 row ID", String(p.storedId)) : ""}
+    </div>
+    <div style="padding:16px 28px;background:#0b0a1c;color:#6b6e80;font-size:12px">
+      Submitted via fatibuclub.workers.dev · Reply directly to this email to reach the applicant.
+    </div>
+  </div></body></html>`;
+}
+
+function field(label: string, value: string) {
+  return `<div style="margin-bottom:16px">
+    <p style="margin:0 0 4px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#6b6e80">${label}</p>
+    <p style="margin:0;font-size:15px;color:#f5f3ee;white-space:pre-wrap;word-break:break-word">${escapeHtml(value)}</p>
+  </div>`;
+}
+
+function renderEmailText(p: {
+  name: string;
+  email: string;
+  publication: string;
+  message: string;
+  storedId: number | null;
+}) {
+  return `FatiBuClub — New submission for committee consideration
+
+Name: ${p.name}
+Email: ${p.email}
+Book / Publication: ${p.publication}
+Message: ${p.message}${p.storedId ? `\nD1 row ID: ${p.storedId}` : ""}
+
+Submitted via fatibuclub.workers.dev — reply to this email to reach the applicant.`;
+}
+
+function escapeHtml(s: string) {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
