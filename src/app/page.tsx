@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/site/navbar";
 import { Hero } from "@/components/site/hero";
+import { AsSeenOn } from "@/components/site/as-seen-on";
 import { Philosophy } from "@/components/site/philosophy";
 import { Stats } from "@/components/site/stats";
 import { Timeline } from "@/components/site/timeline";
@@ -16,6 +17,7 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        <AsSeenOn />
         <Philosophy />
         <Stats />
         <Timeline />
