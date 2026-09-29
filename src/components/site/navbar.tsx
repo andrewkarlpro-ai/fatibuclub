@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -57,21 +56,19 @@ export function Navbar() {
         style={{ WebkitBackdropFilter: scrolled ? "blur(16px)" : "none" }}
       >
         <nav className="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-5 sm:h-[72px] sm:px-8 lg:px-12">
-          {/* Brand */}
+          {/* Brand — text wordmark (logo lives in the footer only) */}
           <a
             href="#top"
-            className="group relative flex items-center"
+            className="group flex items-center gap-2.5"
             aria-label="FatiBuClub home"
           >
-            <Image
-              src="/images/logo.png"
-              alt="FatiBuClub — A Private Literary Society & Managed Reader Experience"
-              width={180}
-              height={45}
-              priority
-              className="h-9 w-auto sm:h-11"
-              style={{ width: "auto", height: "auto" }}
-            />
+            <span className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-line-strong bg-surface">
+              <span className="font-display text-[15px] font-bold text-ink">F</span>
+              <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 rounded-full bg-cream" />
+            </span>
+            <span className="font-display text-[17px] font-semibold tracking-tight text-ink">
+              FatiBuClub
+            </span>
           </a>
 
           {/* Desktop nav */}
@@ -127,13 +124,9 @@ export function Navbar() {
             <div className="absolute inset-0 bg-bg/95 backdrop-blur-xl" />
             <div className="relative flex h-full flex-col">
               <div className="flex h-16 items-center justify-between px-5 sm:px-8">
-                <Image
-                  src="/images/logo.png"
-                  alt="FatiBuClub"
-                  width={160}
-                  height={40}
-                  className="h-9 w-auto"
-                />
+                <span className="font-display text-[17px] font-semibold text-ink">
+                  FatiBuClub
+                </span>
                 <button
                   type="button"
                   aria-label="Close menu"

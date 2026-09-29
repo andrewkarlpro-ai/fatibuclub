@@ -86,10 +86,10 @@ export function ContactForm() {
       {/* ambient glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 aura-accent opacity-20"
+        className="pointer-events-none absolute left-1/2 top-0 z-0 h-[500px] w-[700px] -translate-x-1/2 aura-accent opacity-20"
       />
 
-      <div className="mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           {/* LEFT — copy */}
           <div className="lg:col-span-5">

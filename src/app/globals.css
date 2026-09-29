@@ -424,6 +424,23 @@
     }
   }
 
+  /* As Seen On badge marquee */
+  @keyframes badge-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-badge-marquee {
+    animation: badge-marquee 40s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-badge-marquee {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
   /* Float */
   @keyframes float-y {
     0%, 100% { transform: translateY(0); }

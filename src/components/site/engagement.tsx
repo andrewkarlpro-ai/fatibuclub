@@ -14,7 +14,7 @@ export function Engagement() {
         overlay={80}
       />
       <DividerLine />
-      <div className="mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
         <div className="flex items-center gap-4">
           <span className="font-display text-sm font-medium text-cream tabular-nums">
             04
