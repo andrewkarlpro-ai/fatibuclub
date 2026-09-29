@@ -67,10 +67,8 @@ export const metadata: Metadata = {
     images: ["/og.png"],
   },
   // Google Search Console verification.
-  // Replace the empty string with the content value from your Google
-  // Search Console meta tag (e.g. "google-site-verification" content="ABC123xyz").
   verification: {
-    google: "",
+    google: "HRFsJvVZGRvzf59l9ICfRgAaG2z0Zq_mSYRtt-4wnjs",
   },
   robots: {
     index: true,
