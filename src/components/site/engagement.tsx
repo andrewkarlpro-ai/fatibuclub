@@ -1,11 +1,18 @@
 "use client";
 
 import { Reveal } from "./primitives";
+import { BackgroundImage } from "./background-image";
 import { DividerLine } from "./philosophy";
 
 export function Engagement() {
   return (
     <section className="sec-engagement relative overflow-hidden py-24 sm:py-32 lg:py-40">
+      <BackgroundImage
+        src="/images/bg-manuscript.png"
+        alt="Open antique book, aged pages fanning upward in dramatic warm light."
+        tint="cream"
+        overlay={80}
+      />
       <DividerLine />
       <div className="mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
         <div className="flex items-center gap-4">

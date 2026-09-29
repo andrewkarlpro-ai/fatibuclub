@@ -412,6 +412,17 @@
   .animate-marquee {
     animation: marquee 38s linear infinite;
   }
+  /* For reduced-motion users, show the marquee content as a wrapping
+     static row instead of an animation. */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      padding-right: 0;
+    }
+  }
 
   /* Float */
   @keyframes float-y {

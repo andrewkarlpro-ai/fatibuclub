@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./primitives";
 import { ArrowNudge, Card } from "./ui-atoms";
+import { BackgroundImage } from "./background-image";
 import { DividerLine } from "./philosophy";
 import { Loader2, Check } from "lucide-react";
 
@@ -74,6 +75,12 @@ export function ContactForm() {
       id="contact"
       className="sec-contact anchor relative overflow-hidden py-24 sm:py-32 lg:py-40"
     >
+      <BackgroundImage
+        src="/images/bg-reader.png"
+        alt="Silhouette of a person reading in a dark room with warm lamp light."
+        tint="purple"
+        overlay={85}
+      />
       <DividerLine />
 
       {/* ambient glow */}

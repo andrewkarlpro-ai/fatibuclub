@@ -1,6 +1,9 @@
-/* As Seen On badge — PRNow embed.
-   Faithful reproduction of the PRNow-provided snippet as a React component.
-   Placed after the Hero section as a trust signal. */
+"use client";
+
+/* As Seen On badge — PRNow embed, reimagined as an infinite marquee.
+   The 7 outlet logos scroll continuously; pause on hover; reduced-motion
+   users see a static row. Faithful to the PRNow embed (link + utm params +
+   prp0ib8c class preserved), animated for life. */
 
 const LOGOS: { src: string; alt: string }[] = [
   { src: "https://prnow.io/associated%20press%20logo.png", alt: "Associated Press" },
@@ -13,23 +16,22 @@ const LOGOS: { src: string; alt: string }[] = [
 ];
 
 export function AsSeenOn() {
+  // Duplicate the logo set so the marquee loops seamlessly.
+  const loop = [...LOGOS, ...LOGOS];
+
   return (
     <section
       aria-label="As seen on"
-      className="relative py-14 sm:py-16"
-      style={{ backgroundColor: "#080914" }}
+      className="relative overflow-hidden border-y border-line bg-bg py-12 sm:py-14"
     >
-      <div className="mx-auto max-w-[900px] px-5 sm:px-8">
+      <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-12">
         <a
           href="https://prnow.io/?utm_source=asseenon&utm_medium=badge&utm_campaign=embed"
           target="_blank"
           rel="noopener noreferrer"
-          className="prp0ib8c"
+          className="prp0ib8c group block"
           style={{
-            display: "inline-block",
             textDecoration: "none",
-            maxWidth: "900px",
-            width: "100%",
             fontFamily:
               "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
           }}
@@ -39,10 +41,11 @@ export function AsSeenOn() {
               background: "#ffffff",
               border: "1px solid #e5e7eb",
               borderRadius: "16px",
-              padding: "40px 48px",
+              padding: "28px 0",
               textAlign: "center",
               boxSizing: "border-box",
               boxShadow: "0 4px 12px rgba(15, 23, 42, 0.08)",
+              overflow: "hidden",
             }}
           >
             <div
@@ -55,25 +58,21 @@ export function AsSeenOn() {
                 textTransform: "uppercase",
                 lineHeight: 1.2,
                 margin: "0 0 20px",
+                padding: "0 48px",
               }}
             >
               AS SEEN ON
             </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "22px 32px",
-                flexWrap: "wrap",
-              }}
-            >
-              {LOGOS.map((logo) => (
+
+            {/* Marquee track — duplicated logos for seamless loop */}
+            <div className="group-hover:[animation-play-state:paused] motion-reduce:animate-none animate-marquee flex w-max items-center gap-12 pr-12">
+              {loop.map((logo, i) => (
                 <img
-                  key={logo.alt}
+                  key={`${logo.alt}-${i}`}
                   src={logo.src}
                   alt={logo.alt}
                   loading="lazy"
+                  className="shrink-0"
                   style={{
                     height: "32px",
                     maxWidth: "140px",

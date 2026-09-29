@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import { PillLink, ArrowNudge } from "./ui-atoms";
 import { Reveal } from "./primitives";
+import { BackgroundImage } from "./background-image";
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -39,6 +40,14 @@ export function Hero() {
       onMouseMove={onMove}
       className="sec-hero grain relative flex min-h-[100svh] items-center overflow-hidden pb-20 pt-28 sm:pt-32"
     >
+      {/* atmospheric manuscript background */}
+      <BackgroundImage
+        src="/images/bg-library.png"
+        alt="Atmospheric dark library interior — towering bookshelves receding into shadow."
+        tint="purple"
+        overlay={82}
+        priority
+      />
       {/* background atmospherics */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -right-[10%] top-[5%] h-[620px] w-[620px] aura-accent opacity-60" />
