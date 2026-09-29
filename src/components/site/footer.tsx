@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Reveal } from "./primitives";
 import { PillLink, ArrowNudge } from "./ui-atoms";
 
@@ -23,10 +24,14 @@ export function Footer() {
       <div className="relative mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-12">
         <Reveal y={20}>
           <div className="flex flex-col items-center pt-16 text-center sm:pt-20">
-            <span className="eyebrow">FatiBuClub</span>
-            <h2 className="mt-5 font-display font-medium text-ink display-tighter text-[clamp(3rem,14vw,11rem)]">
-              FatiBuClub
-            </h2>
+            <Image
+              src="/images/logo.png"
+              alt="FatiBuClub — A Private Literary Society & Managed Reader Experience"
+              width={420}
+              height={105}
+              className="h-auto w-[clamp(220px,42vw,420px)]"
+              priority
+            />
           </div>
         </Reveal>
 
