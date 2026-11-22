@@ -75,18 +75,18 @@ export function SectionHeader({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col gap-2", className)}>
+    <div className={cn("flex flex-col gap-1.5", className)}>
       <Reveal className="flex items-center gap-2">
         {index && (
-          <span className="font-display text-[11px] font-semibold text-brand tabular-nums">
+          <span className="font-display text-[10px] font-semibold text-brand tabular-nums sm:text-[11px]">
             {index}
           </span>
         )}
-        {index && <span className="h-px w-6 bg-sage-border" />}
-        <span className="eyebrow">{eyebrow}</span>
+        {index && <span className="h-px w-5 bg-sage-border sm:w-6" />}
+        <span className="eyebrow text-[10px] sm:text-[11px]">{eyebrow}</span>
       </Reveal>
-      <Reveal delay={0.04}>
-        <h2 className="font-display font-semibold text-ink tracking-tight text-xl sm:text-3xl">
+      <Reveal delay={0.03}>
+        <h2 className="font-display font-semibold text-ink tracking-tight text-[18px] sm:text-3xl">
           {title}
         </h2>
       </Reveal>

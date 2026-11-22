@@ -32,7 +32,7 @@ export function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-sage bg-bg/95 backdrop-blur">
-        <nav className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6">
+        <nav className="mx-auto flex h-14 max-w-5xl items-center justify-between px-3.5 sm:px-6">
           {/* Logo */}
           <a href="#top" className="flex items-center gap-2" aria-label="FatiBuClub home">
             <Image src="/images/logo-mark.png" alt="" width={32} height={32} className="h-8 w-8" />

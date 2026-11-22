@@ -56,17 +56,17 @@ const BOOKS: Book[] = [
 
 export function ReadingShelf() {
   return (
-    <section id="reading-shelf" className="anchor bg-sunshine py-10 sm:py-16">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+    <section id="reading-shelf" className="anchor bg-sunshine py-8 sm:py-16">
+      <div className="mx-auto max-w-5xl px-3.5 sm:px-6">
         <SectionHeader index="03" eyebrow="Reading Shelf" title="Indie Books on Our Radar & Reading Shelf" />
 
         <Reveal delay={0.06}>
-          <p className="mt-3 max-w-lg text-sm text-ink-body">
+          <p className="mt-3 max-w-lg text-[13px] text-ink-body sm:text-sm">
             A look at the kind of character-driven independent and small-press stories our readers gravitate toward across Goodreads.
           </p>
         </Reveal>
 
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
           {BOOKS.map((book, i) => (
             <Reveal key={book.title} delay={i * 0.05} className="h-full">
               <BookCard book={book} />
@@ -80,7 +80,7 @@ export function ReadingShelf() {
 
 function BookCard({ book }: { book: Book }) {
   return (
-    <Card className="p-4 flex flex-col h-full">
+    <Card className="p-3 flex flex-col h-full sm:p-4">
       <div className="flex items-center justify-between gap-2">
         <span className="inline-flex rounded-full bg-sage px-2 py-0.5 text-[10px] font-medium uppercase text-brand">
           {book.genre}

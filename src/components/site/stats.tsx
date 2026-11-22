@@ -30,8 +30,8 @@ const STATS: Stat[] = [
 
 export function Stats() {
   return (
-    <section id="community" className="bg-bg py-10 sm:py-16">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+    <section id="community" className="bg-bg py-8 sm:py-16">
+      <div className="mx-auto max-w-5xl px-3.5 sm:px-6">
         <Reveal>
           <div className="flex flex-col items-center text-center">
             <span className="eyebrow">Community Numbers</span>
@@ -44,8 +44,8 @@ export function Stats() {
         <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
           {STATS.map((stat, i) => (
             <Reveal key={stat.label} delay={i * 0.05}>
-              <Card className="h-full p-3 text-center sm:p-4">
-                <p className="font-display text-2xl sm:text-3xl font-bold text-brand tabular-nums leading-none">
+              <Card className="h-full p-2.5 text-center sm:p-4">
+                <p className="font-display text-[20px] sm:text-3xl font-bold text-brand tabular-nums leading-none">
                   {stat.value}
                 </p>
                 <p className="mt-2 font-display text-xs sm:text-sm font-semibold text-ink">

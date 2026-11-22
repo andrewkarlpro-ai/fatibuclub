@@ -39,15 +39,15 @@ export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="anchor bg-sunshine py-10 sm:py-16">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6">
+    <section id="faq" className="anchor bg-sunshine py-8 sm:py-16">
+      <div className="mx-auto max-w-3xl px-3.5 sm:px-6">
         <SectionHeader
           index="06"
           eyebrow="Questions & Answers"
           title="Frequently Asked Questions"
         />
 
-        <p className="mt-3 text-sm text-ink-body">
+        <p className="mt-3 text-[13px] text-ink-body sm:text-sm">
           Common questions from indie authors. Don&apos;t see your question?
           Reach out at{" "}
           <a
@@ -59,7 +59,7 @@ export function Faq() {
           .
         </p>
 
-        <div className="mt-6 space-y-3">
+        <div className="mt-6 space-y-2 sm:space-y-3">
           {FAQ_ITEMS.map((item, i) => {
             const isOpen = openIndex === i;
             return (

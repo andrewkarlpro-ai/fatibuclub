@@ -23,7 +23,7 @@ export function Footer() {
       className="border-t border-sage"
       style={{ backgroundColor: "#EEF6F0" }}
     >
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 py-8">
+      <div className="mx-auto max-w-5xl px-3.5 sm:px-6 py-6 sm:py-8">
         {/* Top — logo + tagline, centered */}
         <Reveal y={12}>
           <div className="flex flex-col items-center justify-center">
@@ -71,7 +71,7 @@ export function Footer() {
 
       {/* Copyright bar */}
       <div className="border-t border-sage">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 py-4 text-center">
+        <div className="mx-auto max-w-5xl px-3.5 sm:px-6 py-4 text-center">
           <p className="text-xs text-ink-faint">
             © 2018–2026 FatiBuClub. All Rights Reserved.
           </p>

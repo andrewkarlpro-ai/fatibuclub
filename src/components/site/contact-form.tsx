@@ -3,9 +3,9 @@
 import * as React from "react";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { Reveal, SectionHeader } from "./primitives";
 import { Card, ArrowNudge } from "./ui-atoms";
+import { SectionBackground } from "./section-background";
 import { Loader2, Check } from "lucide-react";
 
 /* Section 07 · Get in Touch — community photo + book submission form.
@@ -81,8 +81,10 @@ export function ContactForm() {
   }
 
   return (
-    <section id="contact" className="anchor bg-bg-alt py-10 sm:py-16">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+    <section id="contact" className="anchor relative overflow-hidden bg-bg-alt py-8 sm:py-16">
+      {/* Community photo as true background image */}
+      <SectionBackground src="/images/bg-community.png" overlay={0.75} />
+      <div className="relative mx-auto max-w-5xl px-3.5 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           {/* Left — copy + community photo */}
           <div>
@@ -90,26 +92,16 @@ export function ContactForm() {
               index="07"
               eyebrow="Get in Touch"
               title="Share Your Book With FatiBuClub"
-              className="mb-3"
+              className="mb-2.5 sm:mb-3"
             />
-            <p className="text-sm text-ink-body leading-relaxed">
+            <p className="text-[13px] text-ink-body leading-relaxed sm:text-sm">
               Writing an indie thriller, memoir, literary novel, or historical
               story? Send us your book title, Goodreads or Amazon link, and a
               quick note about what inspired it. We read every message
               personally.
             </p>
 
-            <div className="mt-4 relative w-full h-44 sm:h-56 rounded-xl overflow-hidden border border-sage">
-              <Image
-                src="/images/bg-community.png"
-                alt="A bright community of readers enjoying books together in a sunlit room."
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
-
-            <p className="mt-3 text-sm text-ink-body">
+            <p className="mt-3 text-[13px] text-ink-body">
               Prefer email? Reach us at{" "}
               <a
                 href="mailto:fatibuclub@gmail.com"

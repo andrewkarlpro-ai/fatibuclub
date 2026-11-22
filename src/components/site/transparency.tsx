@@ -21,20 +21,20 @@ const CARDS = [
 
 export function Transparency() {
   return (
-    <section id="transparency" className="anchor bg-bg py-10 sm:py-16">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+    <section id="transparency" className="anchor bg-bg py-8 sm:py-16">
+      <div className="mx-auto max-w-5xl px-3.5 sm:px-6">
         <SectionHeader index="05" eyebrow="Transparency" title="Clear, Honest, and Zero Pressure" className="mb-4" />
 
         <Reveal delay={0.04}>
-          <p className="max-w-lg text-sm text-ink-body leading-relaxed mb-6">
+          <p className="max-w-lg text-[13px] text-ink-body leading-relaxed mb-6 sm:text-sm">
             We believe authors deserve clear answers and zero pressure. Selection is based purely on whether your story fits what our readers love to read and talk about.
           </p>
         </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
           {CARDS.map((card, i) => (
             <Reveal key={card.title} delay={0.06 + i * 0.05}>
-              <Card className="p-4 h-full">
+              <Card className="p-3 h-full sm:p-4">
                 <div className="h-9 w-9 rounded-full bg-sage flex items-center justify-center text-brand">
                   <card.icon className="h-4 w-4" />
                 </div>

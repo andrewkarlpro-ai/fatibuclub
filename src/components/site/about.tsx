@@ -6,8 +6,8 @@ const ABOUT_PILLS = ["Thoughtful Reading", "Indie Authors", "Small Circles", "Ho
 
 export function About() {
   return (
-    <section id="about" className="anchor bg-bg-alt py-10 sm:py-16">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+    <section id="about" className="anchor bg-bg-alt py-8 sm:py-16">
+      <div className="mx-auto max-w-5xl px-3.5 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal>
             <div className="flex items-center justify-center gap-2">
@@ -24,7 +24,7 @@ export function About() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <p className="mt-3 text-sm leading-relaxed text-ink-body sm:text-base">
+            <p className="mt-3 text-[13px] leading-relaxed text-ink-body sm:text-base">
               Thousands of remarkable independent books get buried before the
               right readers ever find them. Since 2018, FatiBuClub has been a
               welcoming corner of the internet built for readers who love slowing

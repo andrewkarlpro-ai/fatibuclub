@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
+import * as React from "react";
+import { useState } from "react";
 import { Reveal, SectionHeader } from "./primitives";
 import { Card } from "./ui-atoms";
+import { SectionBackground } from "./section-background";
 
-/* Section 02 · How It Works — reading photo banner + month-tab calendar + 4 steps. */
+/* Section 02 · How It Works — reading photo as background + calendar + steps. */
 
 const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
@@ -31,7 +32,7 @@ function CalendarCard({ month }: { month: Month }) {
   return (
     <div className="card-surface p-3 sm:p-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-display text-sm font-semibold text-ink">{name}</h3>
+        <h3 className="font-display text-[13px] font-semibold text-ink sm:text-sm">{name}</h3>
         <span className="rounded-full bg-sage px-2 py-0.5 text-[10px] font-medium text-brand">
           {pickCount} {pickCount === 1 ? "pick" : "picks"}
         </span>
@@ -41,7 +42,7 @@ function CalendarCard({ month }: { month: Month }) {
           <span key={d} className="text-[8px] uppercase text-ink-faint">{d}</span>
         ))}
         {Array.from({ length: startsOn }).map((_, i) => (
-          <span key={`empty-${i}`} aria-hidden className="h-7" />
+          <span key={`empty-${i}`} aria-hidden className="h-6 sm:h-7" />
         ))}
         {Array.from({ length: days }).map((_, i) => {
           const day = i + 1;
@@ -49,7 +50,7 @@ function CalendarCard({ month }: { month: Month }) {
           return (
             <span
               key={day}
-              className={`flex h-7 items-center justify-center text-[11px] tabular-nums ${
+              className={`flex h-6 items-center justify-center rounded text-[10px] tabular-nums sm:h-7 sm:text-[11px] ${
                 isPick ? "bg-brand font-semibold text-white" : "text-ink-body"
               }`}
             >
@@ -66,76 +67,65 @@ export function HowItWorks() {
   const [activeMonth, setActiveMonth] = useState(0);
 
   return (
-    <section id="how-it-works" className="anchor bg-bg-alt py-10 sm:py-16">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+    <section id="how-it-works" className="anchor relative overflow-hidden bg-bg-alt py-8 sm:py-16">
+      {/* Reading photo as true background image */}
+      <SectionBackground src="/images/bg-reading.png" overlay={0.75} />
+
+      <div className="relative mx-auto max-w-5xl px-3.5 sm:px-6">
         <SectionHeader index="02" eyebrow="How Reading Circles Work" title="Simple, Personal, and Built Around Your Book" />
 
-        {/* Reading photo banner — 100% opacity, clean editorial */}
+        {/* Mobile: month tabs */}
         <Reveal delay={0.06}>
-          <div className="mt-4 relative w-full h-44 sm:h-60 rounded-xl overflow-hidden border border-sage">
-            <Image
-              src="/images/bg-reading.png"
-              alt="Warm close-up of hands holding an open book in soft sunlight."
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 33vw"
-            />
-          </div>
-        </Reveal>
-
-        {/* Month-tab calendar — tabs on mobile, all 3 side-by-side on desktop */}
-        <Reveal delay={0.1}>
-          {/* Mobile: tab buttons */}
-          <div className="mt-5 flex gap-2 md:hidden">
+          <div className="mt-4 flex gap-1.5 md:hidden">
             {MONTHS.map((m, i) => (
               <button
                 key={m.name}
                 type="button"
                 onClick={() => setActiveMonth(i)}
-                className={`flex-1 rounded-lg border px-2 py-2 text-xs font-medium transition-colors ${
-                  activeMonth === i ? "border-brand bg-brand text-white" : "border-sage text-ink-body"
+                className={`flex-1 rounded-lg border px-1.5 py-1.5 text-[11px] font-medium transition-colors ${
+                  activeMonth === i ? "border-brand bg-brand text-white" : "border-sage bg-surface text-ink-body"
                 }`}
               >
                 {m.name}
               </button>
             ))}
           </div>
-
-          {/* Mobile: single active calendar */}
-          <div className="mt-3 md:hidden">
+          <div className="mt-2.5 md:hidden">
             <CalendarCard month={MONTHS[activeMonth]} />
           </div>
+        </Reveal>
 
-          {/* Desktop: all 3 calendars side-by-side */}
-          <div className="mt-5 hidden md:grid md:grid-cols-3 gap-4">
+        {/* Desktop: all 3 calendars side-by-side */}
+        <Reveal delay={0.08}>
+          <div className="mt-4 hidden gap-4 md:grid md:grid-cols-3">
             {MONTHS.map((m) => (
               <CalendarCard key={m.name} month={m} />
             ))}
           </div>
-
-          {/* Legend */}
-          <div className="mt-3 flex items-center gap-4">
-            <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-brand" />
-              <span className="text-[11px] text-ink-body">Selection day</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full border border-sage" />
-              <span className="text-[11px] text-ink-body">Open day</span>
-            </div>
-          </div>
         </Reveal>
 
+        {/* Legend */}
+        <div className="mt-2.5 flex items-center gap-3 sm:mt-3 sm:gap-4">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full bg-brand" />
+            <span className="text-[10px] text-ink-body sm:text-[11px]">Selection day</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full border border-sage" />
+            <span className="text-[10px] text-ink-body sm:text-[11px]">Open day</span>
+          </div>
+        </div>
+
         {/* 4 steps */}
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 lg:mt-6">
           {STEPS.map((step, i) => (
-            <Reveal key={step.title} delay={i * 0.05}>
-              <Card className="p-4 h-full">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-white font-display text-xs font-semibold">
+            <Reveal key={step.title} delay={i * 0.04}>
+              <Card className="h-full p-3 sm:p-4">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand text-[11px] font-semibold text-white">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="font-display text-sm font-semibold text-ink mt-2">{step.title}</h3>
-                <p className="text-sm text-ink-body mt-1.5 leading-relaxed">{step.body}</p>
+                <h3 className="mt-2 font-display text-[14px] font-semibold text-ink leading-tight sm:text-sm">{step.title}</h3>
+                <p className="mt-1.5 text-[12px] leading-[1.5] text-ink-body sm:text-sm sm:leading-relaxed">{step.body}</p>
               </Card>
             </Reveal>
           ))}
