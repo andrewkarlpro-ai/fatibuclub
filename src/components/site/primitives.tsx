@@ -154,7 +154,7 @@ export function useScrollSpy(ids: string[], offset = 120) {
   return active;
 }
 
-/* SectionHeader — eyebrow + title (no oversized numbers) */
+/* SectionHeader — eyebrow + title (compact sizing) */
 export function SectionHeader({
   index,
   eyebrow,
@@ -171,22 +171,22 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3",
+        "flex flex-col gap-2.5",
         align === "center" && "items-center text-center",
         className
       )}
     >
-      <Reveal className="flex items-center gap-3">
+      <Reveal className="flex items-center gap-2.5">
         {index && (
-          <span className="font-display text-xs font-semibold text-brand tabular-nums">
+          <span className="font-display text-[11px] font-semibold text-brand tabular-nums">
             {index}
           </span>
         )}
-        {index && <span className="h-px w-8 bg-sage-border" />}
-        <span className="eyebrow">{eyebrow}</span>
+        {index && <span className="h-px w-7 bg-sage-border" />}
+        <span className="eyebrow !text-[11px]">{eyebrow}</span>
       </Reveal>
-      <Reveal delay={0.06}>
-        <h2 className="font-display font-semibold text-ink tracking-tight text-[clamp(1.4rem,3.5vw,2.25rem)] leading-tight">
+      <Reveal delay={0.05}>
+        <h2 className="font-display font-semibold text-ink tracking-tight text-[20px] leading-[1.2] sm:text-[clamp(1.25rem,3vw,2.125rem)]">
           {title}
         </h2>
       </Reveal>

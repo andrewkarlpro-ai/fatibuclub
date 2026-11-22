@@ -3,10 +3,7 @@
 import * as React from "react";
 import { Reveal } from "./primitives";
 
-/* ============================================================
-   About — Why We Exist
-   Light, alternating sage-cream bg. Centered, intimate tone.
-   ============================================================ */
+/* About — Why We Exist. Compact, mentions founding in 2018. */
 
 const ABOUT_PILLS: string[] = [
   "Thoughtful Reading",
@@ -19,44 +16,44 @@ export function About() {
   return (
     <section
       id="about"
-      className="anchor bg-bg-alt py-12 sm:py-16 md:py-18"
+      className="anchor bg-bg-alt py-9 sm:py-14 md:py-16"
     >
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          {/* eyebrow centered with a small index mark */}
+      <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
           <Reveal>
-            <div className="flex items-center justify-center gap-3">
-              <span className="font-display text-xs font-semibold text-brand tabular-nums">
+            <div className="flex items-center justify-center gap-2.5">
+              <span className="font-display text-[11px] font-semibold text-brand tabular-nums">
                 01
               </span>
-              <span aria-hidden className="h-px w-8 bg-[var(--color-sage-border)]" />
-              <span className="eyebrow">Why We Exist</span>
+              <span aria-hidden className="h-px w-7 bg-[var(--color-sage-border)]" />
+              <span className="eyebrow !text-[11px]">Why We Exist</span>
             </div>
           </Reveal>
 
-          <Reveal delay={0.06}>
-            <h2 className="mt-4 font-display font-semibold text-ink tracking-tight text-[22px] leading-[1.2] sm:text-[clamp(1.375rem,3vw,2.25rem)]">
+          <Reveal delay={0.05}>
+            <h2 className="mt-3.5 font-display font-semibold text-ink tracking-tight text-[20px] leading-[1.2] sm:text-[clamp(1.25rem,3vw,2.125rem)]">
               Good Indie Books Deserve Real Conversation
             </h2>
           </Reveal>
 
-          <Reveal delay={0.14}>
-            <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-[1.6] text-ink-body sm:text-base">
+          <Reveal delay={0.12}>
+            <p className="mx-auto mt-4 max-w-xl text-[14px] leading-[1.55] text-ink-body sm:text-[15px] sm:leading-[1.6]">
               Thousands of remarkable independent books get buried before the
-              right readers ever find them. FatiBuClub is a welcoming corner of
-              the internet built for readers who love slowing down, reading
-              closely, and talking through stories together. Whether it is a
-              tense thriller, a moving memoir, or sweeping historical fiction,
-              we care about stories with real heart and craft.
+              right readers ever find them. Since 2018, FatiBuClub has been a
+              welcoming corner of the internet built for readers who love
+              slowing down, reading closely, and talking through stories
+              together. Whether it is a tense thriller, a moving memoir, or
+              sweeping historical fiction, we care about stories with real
+              heart and craft.
             </p>
           </Reveal>
 
-          <Reveal delay={0.22}>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
+          <Reveal delay={0.2}>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
               {ABOUT_PILLS.map((pill) => (
                 <span
                   key={pill}
-                  className="rounded-full border border-sage bg-sage px-4 py-2 text-[13px] text-ink-body"
+                  className="rounded-full border border-sage bg-sage px-3.5 py-1.5 text-[12px] text-ink-body"
                 >
                   {pill}
                 </span>

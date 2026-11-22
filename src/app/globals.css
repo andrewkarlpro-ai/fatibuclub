@@ -179,11 +179,12 @@
     scroll-margin-top: 80px;
   }
 
-  /* Standard card surface — white with sage border + subtle shadow */
+  /* Standard card surface — white with sage border + subtle shadow (compact) */
   .card-surface {
     background: var(--color-surface);
     border: 1px solid var(--color-sage-border);
     box-shadow: var(--shadow-card);
+    border-radius: 12px;
   }
 
   /* Animated underline link */

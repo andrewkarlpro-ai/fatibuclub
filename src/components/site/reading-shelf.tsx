@@ -1,17 +1,10 @@
 "use client";
 
 import * as React from "react";
-import {
-  Reveal,
-  SectionHeader,
-  StaggerGroup,
-  StaggerItem,
-} from "./primitives";
+import { Reveal, SectionHeader } from "./primitives";
 import { Card, ArrowNudge } from "./ui-atoms";
 
-/* ------------------------------------------------------------------ */
-/*  Section 5 · On Our Reading Shelf                                  */
-/* ------------------------------------------------------------------ */
+/* Section 03 · On Our Reading Shelf — yellow bg, compact cards. */
 
 type Book = {
   title: string;
@@ -66,28 +59,28 @@ export function ReadingShelf() {
   return (
     <section
       id="reading-shelf"
-      className="anchor bg-sunshine py-12 sm:py-16 md:py-18 relative overflow-hidden"
+      className="anchor bg-sunshine py-9 sm:py-14 md:py-16 relative overflow-hidden"
     >
-      <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
+      <div className="relative z-10 mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         <SectionHeader
           index="03"
           eyebrow="Reading Shelf"
           title="Indie Books on Our Radar & Reading Shelf"
         />
-        <Reveal delay={0.1}>
-          <p className="mt-4 max-w-2xl text-[15px] leading-[1.6] text-ink-body">
+        <Reveal delay={0.08}>
+          <p className="mt-3 max-w-xl text-[14px] leading-[1.55] text-ink-body sm:text-[15px]">
             A look at the kind of character-driven independent and small-press
             stories our readers gravitate toward across Goodreads.
           </p>
         </Reveal>
 
-        <StaggerGroup className="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5">
-          {BOOKS.map((book) => (
-            <StaggerItem key={book.title} className="h-full">
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4">
+          {BOOKS.map((book, i) => (
+            <Reveal key={book.title} delay={i * 0.06}>
               <BookCard book={book} />
-            </StaggerItem>
+            </Reveal>
           ))}
-        </StaggerGroup>
+        </div>
       </div>
     </section>
   );
@@ -95,46 +88,42 @@ export function ReadingShelf() {
 
 function BookCard({ book }: { book: Book }) {
   return (
-    <Card hover className="flex h-full flex-col p-5 sm:p-6">
-      {/* Top row — genre tag + rating */}
-      <div className="flex items-center justify-between gap-3">
-        <span className="inline-flex rounded-full bg-sage px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide text-brand">
+    <Card hover className="flex h-full flex-col p-3.5 sm:p-5">
+      <div className="flex items-center justify-between gap-2">
+        <span className="inline-flex rounded-full bg-sage px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-brand sm:text-[11px]">
           {book.genre}
         </span>
         {book.rating ? (
-          <span className="inline-flex items-center gap-1 font-display text-[13px] font-semibold text-ink">
+          <span className="inline-flex items-center gap-0.5 font-display text-[12px] font-semibold text-ink sm:text-[13px]">
             <span aria-hidden className="text-cream">
               ★
             </span>
             {book.rating}
           </span>
         ) : (
-          <span className="text-[12px] text-ink-faint">New on Goodreads</span>
+          <span className="inline-flex rounded-full bg-brand/10 px-2 py-0.5 text-[10px] font-medium text-brand sm:text-[11px]">
+            Indie Pick
+          </span>
         )}
       </div>
 
-      {/* Title */}
-      <h3 className="mt-3 font-display text-[17px] font-semibold leading-tight text-ink sm:text-[18px]">
+      <h3 className="mt-2.5 font-display text-[16px] font-semibold leading-tight text-ink sm:text-[18px]">
         {book.title}
       </h3>
 
-      {/* Author */}
-      <p className="mt-1 text-[13px] text-ink-body">by {book.author}</p>
+      <p className="mt-1 text-[12px] text-ink-body sm:text-[13px]">by {book.author}</p>
 
-      {/* Hook */}
-      <p className="mt-3 text-[14px] leading-[1.6] text-ink-body">
+      <p className="mt-2.5 text-[13px] leading-[1.55] text-ink-body sm:text-[14px]">
         {book.hook}
       </p>
 
-      {/* Review count */}
-      <p className="mt-3 text-[12px] text-ink-faint">{book.reviews}</p>
+      <p className="mt-2.5 text-[11px] text-ink-faint sm:text-[12px]">{book.reviews}</p>
 
-      {/* View on Goodreads */}
       <a
         href={book.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="group mt-auto inline-flex items-center pt-4 text-[13px] font-medium text-brand hover:underline"
+        className="group mt-auto inline-flex items-center pt-3 text-[12px] font-medium text-brand hover:underline sm:text-[13px]"
       >
         View on Goodreads
         <ArrowNudge className="ml-1.5" />

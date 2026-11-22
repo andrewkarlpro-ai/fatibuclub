@@ -74,20 +74,20 @@ export function ContactForm() {
   return (
     <section
       id="contact"
-      className="anchor bg-bg-alt relative overflow-hidden py-12 sm:py-16 md:py-18"
+      className="anchor bg-bg-alt relative overflow-hidden py-9 sm:py-14 md:py-16"
     >
       <BackgroundImage
         src="/images/bg-community.png"
         alt="A bright community of readers enjoying books together in a sunlit room."
         tint="green"
-        overlay={88}
+        overlay={60}
       />
-      <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
+      <div className="relative z-10 mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left — copy */}
           <div>
             <SectionHeader
-              index="06"
+              index="07"
               eyebrow="Get in Touch"
               title="Share Your Book With FatiBuClub"
               className="mb-5 sm:mb-6"

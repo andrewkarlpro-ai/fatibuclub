@@ -1,33 +1,31 @@
 "use client";
 
-import * as React from "react";
+import { Reveal } from "./primitives";
 import { Card } from "./ui-atoms";
-import { Reveal, useCountUp } from "./primitives";
 
-type Stat = {
-  value: number | string;
-  label: string;
-  sub: string;
-};
+/* Stats — Community Numbers. Static numbers (no count-up).
+   2x2 on mobile, 4 columns on desktop. Compact. */
+
+type Stat = { value: string; label: string; sub: string };
 
 const STATS: Stat[] = [
   {
-    value: 240,
+    value: "1,240",
     label: "Community Members",
     sub: "Readers from around the world who love discovering indie books.",
   },
   {
-    value: 65,
+    value: "450",
     label: "Active Readers",
     sub: "Members actively joining monthly reading circles and discussions.",
   },
   {
-    value: 25,
+    value: "150",
     label: "Average Readers Per Book",
     sub: "Small enough for real discussion, big enough to spark momentum.",
   },
   {
-    value: "1\u20132",
+    value: "1–2",
     label: "Monthly Picks",
     sub: "Selected carefully each month so every book gets real attention.",
   },
@@ -35,28 +33,30 @@ const STATS: Stat[] = [
 
 export function Stats() {
   return (
-    <section id="community" className="bg-bg py-12 sm:py-16 md:py-18">
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+    <section id="community" className="bg-bg py-9 sm:py-14 md:py-16">
+      <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         {/* header */}
         <Reveal>
           <div className="flex flex-col items-center text-center">
-            <span className="eyebrow">Community Numbers</span>
-            <h2 className="mt-3 font-display font-semibold text-ink text-xl sm:text-2xl">
+            <span className="eyebrow !text-[11px]">Community Numbers</span>
+            <h2 className="mt-2.5 font-display font-semibold text-ink text-[18px] sm:text-[22px]">
               Readers Who Care
             </h2>
           </div>
         </Reveal>
 
         {/* grid — 2x2 on mobile, 4 cols on desktop */}
-        <div className="mt-8 sm:mt-10 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+        <div className="mt-7 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {STATS.map((stat, i) => (
-            <Reveal key={stat.label} delay={i * 0.08}>
-              <Card className="card-surface h-full rounded-2xl p-5 sm:p-6 text-center lg:text-left">
-                <StatValue value={stat.value} index={i} />
-                <p className="mt-3 font-display text-[14px] sm:text-[15px] font-semibold text-ink">
+            <Reveal key={stat.label} delay={i * 0.06}>
+              <Card className="card-surface h-full p-3.5 sm:p-5 text-center lg:text-left">
+                <p className="font-display text-[24px] sm:text-[32px] lg:text-[36px] font-bold text-brand leading-none tabular-nums">
+                  {stat.value}
+                </p>
+                <p className="mt-2.5 font-display text-[13px] sm:text-[14px] font-semibold text-ink">
                   {stat.label}
                 </p>
-                <p className="mt-1 text-[13px] text-ink-body leading-[1.5]">
+                <p className="mt-1 text-[12px] text-ink-body leading-[1.5] sm:text-[13px]">
                   {stat.sub}
                 </p>
               </Card>
@@ -65,36 +65,5 @@ export function Stats() {
         </div>
       </div>
     </section>
-  );
-}
-
-function StatValue({
-  value,
-  index,
-}: {
-  value: number | string;
-  index: number;
-}) {
-  if (typeof value === "string") {
-    return (
-      <p className="font-display text-[26px] sm:text-[30px] lg:text-[36px] font-bold text-brand leading-none tabular-nums">
-        {value}
-      </p>
-    );
-  }
-  return <StatNumber value={value} index={index} />;
-}
-
-function StatNumber({ value, index }: { value: number; index: number }) {
-  const { ref, display } = useCountUp(value, {
-    duration: 1400 + index * 120,
-  });
-  return (
-    <span
-      ref={ref}
-      className="block font-display text-[26px] sm:text-[30px] lg:text-[36px] font-bold text-brand leading-none tabular-nums"
-    >
-      {display}
-    </span>
   );
 }

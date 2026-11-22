@@ -55,20 +55,20 @@ export function BackgroundImage({
           className="object-cover"
         />
       </motion.div>
-      {/* Bright overlay — keeps text on a clean light surface */}
+      {/* Bright overlay — lighter so images are clearly visible (0.55-0.65) */}
       <div
         className="absolute inset-0"
         style={{ backgroundColor: `rgba(251, 253, 251, ${overlay / 100})` }}
       />
-      {/* Soft tint wash */}
+      {/* Soft tint wash — reduced so the photo shows through richly */}
       <div
-        className="absolute inset-0 mix-blend-multiply"
+        className="absolute inset-0 mix-blend-soft-light"
         style={{ backgroundColor: TINT_RGBA[tint] }}
       />
-      {/* Bottom fade into next section */}
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#fbfdfb] to-transparent" />
-      {/* Top fade (for navbar transition) */}
-      <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#fbfdfb] to-transparent" />
+      {/* Bottom fade into next section — shorter for tighter feel */}
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#fbfdfb] to-transparent" />
+      {/* Top fade (for navbar transition) — shorter */}
+      <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-[#fbfdfb] to-transparent" />
     </div>
   );
 }

@@ -1,27 +1,21 @@
 "use client";
 
 import * as React from "react";
-import {
-  Reveal,
-  SectionHeader,
-  StaggerGroup,
-  StaggerItem,
-} from "./primitives";
+import { Reveal, SectionHeader } from "./primitives";
 import { Card } from "./ui-atoms";
 import { BackgroundImage } from "./background-image";
 
-/* ------------------------------------------------------------------ */
-/*  Section 4 · How It Works                                           */
-/* ------------------------------------------------------------------ */
+/* Section 02 · How It Works — compact, with reading background. */
 
 const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
-// Three representative months of the 2026 reading calendar.
+// Upcoming late-2026 / early-2027 reading calendar.
 // `startsOn` is the weekday index (0 = Monday) the 1st falls on.
+// Dec 1 2026 = Tuesday (index 1), Jan 1 2027 = Friday (index 4), Feb 1 2027 = Monday (index 0).
 const MONTHS = [
-  { name: "October", startsOn: 2, days: 31, picks: [7, 22] },
-  { name: "November", startsOn: 5, days: 30, picks: [11] },
-  { name: "December", startsOn: 0, days: 31, picks: [4, 18] },
+  { name: "Dec 2026", startsOn: 1, days: 31, picks: [8, 22] },
+  { name: "Jan 2027", startsOn: 4, days: 31, picks: [12, 26] },
+  { name: "Feb 2027", startsOn: 0, days: 28, picks: [9] },
 ] as const;
 
 const STEPS = [
@@ -31,7 +25,7 @@ const STEPS = [
   },
   {
     title: "Reader Sign-Up",
-    body: "When a title is selected, interested members sign up to join that book's reading circle—averaging around 25 readers, or a smaller group if an author prefers.",
+    body: "When a title is selected, interested members sign up to join that book's reading circle—averaging around 150 readers, or a smaller group if an author prefers.",
   },
   {
     title: "Group Reading & Discussion",
@@ -47,60 +41,59 @@ export function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="anchor bg-bg-alt relative overflow-hidden py-12 sm:py-16 md:py-18"
+      className="anchor bg-bg-alt relative overflow-hidden py-9 sm:py-14 md:py-16"
     >
       <BackgroundImage
         src="/images/bg-reading.png"
         alt="Warm close-up of hands holding an open book in soft sunlight."
         tint="warm"
-        overlay={90}
+        overlay={62}
       />
-      <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
+      <div className="relative z-10 mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         <SectionHeader
           index="02"
           eyebrow="How Reading Circles Work"
           title="Simple, Personal, and Built Around Your Book"
         />
 
-        {/* Part A — 3-month reading calendar */}
-        <Reveal delay={0.1} className="mt-10 sm:mt-12">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {/* 3-month reading calendar */}
+        <Reveal delay={0.08} className="mt-7 sm:mt-10">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {MONTHS.map((m) => (
               <CalendarCard key={m.name} month={m} />
             ))}
           </div>
 
-          {/* Legend */}
-          <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
-            <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-brand" />
-              <span className="text-[12px] text-ink-body">Selection day</span>
+          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1.5">
+            <div className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-brand" />
+              <span className="text-[11px] text-ink-body sm:text-[12px]">Selection day</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full border border-sage-border" />
-              <span className="text-[12px] text-ink-body">Open day</span>
+            <div className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full border border-sage-border" />
+              <span className="text-[11px] text-ink-body sm:text-[12px]">Open day</span>
             </div>
           </div>
         </Reveal>
 
-        {/* Part B — 4 plain steps */}
-        <StaggerGroup className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:mt-12 lg:grid-cols-4">
+        {/* 4 plain steps */}
+        <div className="mt-7 grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:mt-10 lg:grid-cols-4">
           {STEPS.map((step, i) => (
-            <StaggerItem key={step.title} className="h-full">
-              <Card className="h-full p-5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand font-display text-sm font-semibold text-white">
+            <Reveal key={step.title} delay={i * 0.06}>
+              <Card className="h-full p-3.5 sm:p-5">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand font-display text-[12px] font-semibold text-white">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 font-display text-[15px] font-semibold text-ink sm:text-base">
+                <h3 className="mt-2.5 font-display text-[14px] font-semibold text-ink sm:text-[15px]">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-[13px] leading-[1.6] text-ink-body sm:text-[14px]">
+                <p className="mt-1.5 text-[12px] leading-[1.55] text-ink-body sm:text-[13px] sm:leading-[1.6]">
                   {step.body}
                 </p>
               </Card>
-            </StaggerItem>
+            </Reveal>
           ))}
-        </StaggerGroup>
+        </div>
       </div>
     </section>
   );
@@ -112,41 +105,37 @@ function CalendarCard({ month }: { month: (typeof MONTHS)[number] }) {
   const pickCount = picks.length;
 
   return (
-    <div className="card-surface rounded-2xl p-4 sm:p-5">
-      {/* Header — month name + picks badge */}
+    <div className="card-surface p-3 sm:p-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-display text-sm font-semibold text-ink sm:text-base">
+        <h3 className="font-display text-[13px] font-semibold text-ink sm:text-[14px]">
           {name}
         </h3>
-        <span className="rounded-full bg-sage px-2 py-0.5 text-[11px] font-medium text-brand">
+        <span className="rounded-full bg-sage px-2 py-0.5 text-[10px] font-medium text-brand sm:text-[11px]">
           {pickCount} {pickCount === 1 ? "pick" : "picks"}
         </span>
       </div>
 
-      {/* 7-col grid: weekdays + days */}
-      <div className="mt-3 grid grid-cols-7 gap-1 text-center">
+      <div className="mt-2.5 grid grid-cols-7 gap-0.5 text-center sm:gap-1">
         {WEEKDAYS.map((d) => (
           <span
             key={d}
-            className="text-[9px] font-medium uppercase text-ink-faint sm:text-[10px]"
+            className="text-[8px] font-medium uppercase text-ink-faint sm:text-[9px]"
           >
             {d}
           </span>
         ))}
 
-        {/* Empty offset cells before day 1 */}
         {Array.from({ length: startsOn }).map((_, i) => (
-          <span key={`empty-${i}`} aria-hidden className="h-7 sm:h-8" />
+          <span key={`empty-${i}`} aria-hidden className="h-5 sm:h-7" />
         ))}
 
-        {/* Day cells */}
         {Array.from({ length: days }).map((_, i) => {
           const day = i + 1;
           const isPick = picks.includes(day);
           return (
             <span
               key={day}
-              className={`flex h-7 items-center justify-center rounded-md text-[11px] tabular-nums sm:h-8 sm:text-[12px] ${
+              className={`flex h-5 items-center justify-center rounded text-[10px] tabular-nums sm:h-7 sm:text-[11px] ${
                 isPick
                   ? "bg-brand font-semibold text-white"
                   : "text-ink-body"

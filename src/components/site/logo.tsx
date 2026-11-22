@@ -37,8 +37,8 @@ export function Logo({
           FatiBuClub
         </span>
         {showTagline && (
-          <span className="mt-0.5 text-[10px] uppercase tracking-[0.18em] text-ink-faint font-medium">
-            Private Indie Reading Society
+          <span className="mt-0.5 text-[10px] uppercase tracking-[0.14em] text-ink-faint font-medium">
+            Private Reading Society · Est. 2018
           </span>
         )}
       </span>

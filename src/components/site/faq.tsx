@@ -7,9 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Reveal, SectionHeader } from "./primitives";
 import { cn } from "@/lib/utils";
 
-/* ------------------------------------------------------------------ */
-/*  Section 7 · Frequently Asked Questions                            */
-/* ------------------------------------------------------------------ */
+/* Section 06 · Questions & Answers — compact accordion, no Goodreads Q. */
 
 const FAQ_ITEMS = [
   {
@@ -22,11 +20,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "How many readers will read my book?",
-    a: "Our reading circles average around 25 readers per book, but we can arrange a smaller group if you prefer a more intimate discussion. We'll discuss the group size with you by email before anything starts.",
-  },
-  {
-    q: "Are the Goodreads reviews guaranteed to be positive?",
-    a: "No. Reviews are always honest reflections shared by our readers on Goodreads. We never promise positive reviews, rankings, or sales. What we offer is genuine reading and thoughtful discussion by real readers who care about stories.",
+    a: "Our reading circles average around 150 readers per book, but we can arrange a smaller group if you prefer a more intimate discussion. We'll discuss the group size with you by email before anything starts.",
   },
   {
     q: "What genres do you accept?",
@@ -44,27 +38,26 @@ export function Faq() {
   return (
     <section
       id="faq"
-      className="anchor bg-sunshine relative overflow-hidden py-12 sm:py-16 md:py-18"
+      className="anchor bg-sunshine relative overflow-hidden py-9 sm:py-14 md:py-16"
     >
-      {/* Soft decorative glow — keeps the section warm without distracting */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-white/40 blur-3xl"
+        className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-white/40 blur-3xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-sage/60 blur-3xl"
+        className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-sage/60 blur-3xl"
       />
 
-      <div className="relative mx-auto max-w-3xl px-5 sm:px-8">
+      <div className="relative mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          index="07"
+          index="06"
           eyebrow="Questions & Answers"
           title="Frequently Asked Questions"
         />
 
-        <Reveal delay={0.08}>
-          <p className="mt-4 max-w-2xl text-[15px] leading-[1.6] text-ink-body sm:text-base">
+        <Reveal delay={0.06}>
+          <p className="mt-3 max-w-xl text-[13px] leading-[1.55] text-ink-body sm:text-[14px] sm:leading-[1.6]">
             Common questions from indie authors thinking about sharing their
             book with us. Don't see your question? Reach out at{" "}
             <a
@@ -78,16 +71,16 @@ export function Faq() {
         </Reveal>
 
         {/* Accordion */}
-        <div className="mt-8 flex flex-col gap-3 sm:mt-10">
+        <div className="mt-6 flex flex-col gap-2.5 sm:mt-8">
           {FAQ_ITEMS.map((item, i) => {
             const isOpen = openIndex === i;
             return (
-              <Reveal key={item.q} delay={0.04 * i}>
+              <Reveal key={item.q} delay={0.03 * i}>
                 <div
                   className={cn(
-                    "card-surface overflow-hidden rounded-2xl transition-all duration-300",
+                    "card-surface overflow-hidden transition-all duration-300",
                     isOpen &&
-                      "border-brand shadow-[0_2px_8px_rgba(28,43,34,0.06),0_8px_28px_rgba(46,125,82,0.1)]"
+                      "border-brand shadow-[0_2px_8px_rgba(28,43,34,0.06),0_8px_24px_rgba(46,125,82,0.1)]"
                   )}
                 >
                   <button
@@ -96,14 +89,14 @@ export function Faq() {
                     aria-expanded={isOpen}
                     aria-controls={`faq-panel-${i}`}
                     id={`faq-trigger-${i}`}
-                    className="flex w-full items-center justify-between gap-4 p-5 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-inset"
+                    className="flex w-full items-center justify-between gap-3 p-3.5 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-inset sm:p-4"
                   >
-                    <span className="font-display text-[15px] font-semibold text-ink sm:text-base">
+                    <span className="font-display text-[14px] font-semibold text-ink sm:text-[15px]">
                       {item.q}
                     </span>
                     <ChevronDown
                       className={cn(
-                        "h-5 w-5 shrink-0 text-brand transition-transform duration-300",
+                        "h-[18px] w-[18px] shrink-0 text-brand transition-transform duration-300",
                         isOpen && "rotate-180"
                       )}
                     />
@@ -125,7 +118,7 @@ export function Faq() {
                         }}
                         className="overflow-hidden"
                       >
-                        <p className="px-5 pb-5 text-[14px] leading-[1.6] text-ink-body sm:text-[15px]">
+                        <p className="px-3.5 pb-3.5 text-[13px] leading-[1.55] text-ink-body sm:px-4 sm:pb-4 sm:text-[14px]">
                           {item.a}
                         </p>
                       </motion.div>

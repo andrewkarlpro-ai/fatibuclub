@@ -3,6 +3,8 @@
 import { Gift, Mail } from "lucide-react";
 import { Reveal, SectionHeader } from "./primitives";
 
+/* Section 05 · Transparency — compact, two side-by-side cards. */
+
 const CARDS = [
   {
     icon: Gift,
@@ -18,34 +20,34 @@ const CARDS = [
 
 export function Transparency() {
   return (
-    <section id="transparency" className="anchor bg-bg py-12 sm:py-16 md:py-18">
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+    <section id="transparency" className="anchor bg-bg py-9 sm:py-14 md:py-16">
+      <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         <SectionHeader
           index="05"
           eyebrow="Transparency"
           title="Clear, Honest, and Zero Pressure"
-          className="mb-5 sm:mb-6"
+          className="mb-4 sm:mb-5"
         />
 
-        <Reveal delay={0.06}>
-          <p className="max-w-2xl text-[15px] sm:text-base text-ink-body leading-[1.7] mb-8 sm:mb-10">
+        <Reveal delay={0.05}>
+          <p className="max-w-xl text-[14px] sm:text-[15px] text-ink-body leading-[1.6] mb-6 sm:mb-8">
             We believe authors deserve clear answers and zero pressure.
             Selection is based purely on whether your story fits what our
             readers love to read and talk about.
           </p>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           {CARDS.map((card, i) => (
-            <Reveal key={card.title} delay={0.1 + i * 0.08}>
-              <div className="card-surface rounded-2xl p-5 sm:p-6 h-full">
-                <div className="h-10 w-10 rounded-full bg-sage flex items-center justify-center text-brand">
-                  <card.icon className="h-5 w-5" />
+            <Reveal key={card.title} delay={0.08 + i * 0.06}>
+              <div className="card-surface p-3.5 sm:p-5 h-full">
+                <div className="h-9 w-9 rounded-full bg-sage flex items-center justify-center text-brand">
+                  <card.icon className="h-[18px] w-[18px]" />
                 </div>
-                <h3 className="font-display text-[16px] sm:text-[18px] font-semibold text-ink mt-3">
+                <h3 className="font-display text-[15px] sm:text-[17px] font-semibold text-ink mt-2.5">
                   {card.title}
                 </h3>
-                <p className="text-[14px] text-ink-body leading-[1.6] mt-2">
+                <p className="text-[13px] sm:text-[14px] text-ink-body leading-[1.55] mt-1.5">
                   {card.body}
                 </p>
               </div>
