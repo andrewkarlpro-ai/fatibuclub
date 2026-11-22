@@ -15,26 +15,24 @@ const inter = Inter({
   display: "swap",
 });
 
-// Canonical production URL. Update this if you add a custom domain.
 const SITE_URL = "https://fatibuclub.fatibuclub.workers.dev";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "FatiBuClub | Private Literary Society & Managed Reader Experience",
+  title: "FatiBuClub | Private Indie Reading Society for Independent Authors",
   description:
-    "FatiBuClub is a private literary society connecting independent authors with an engaged global reading community through a structured, year-long literary experience.",
+    "FatiBuClub connects independent authors with small, attentive reading circles for genuine reading, lively group discussion, and honest Goodreads reviews.",
   applicationName: "FatiBuClub",
   keywords: [
     "FatiBuClub",
-    "literary society",
-    "private reading community",
+    "indie books",
     "independent authors",
-    "managed reader experience",
-    "literary salon",
-    "book residency",
-    "selection committee",
-    "literary culture",
-    "deep reading",
+    "reading circle",
+    "book club",
+    "Goodreads reviews",
+    "reading community",
+    "literary community",
+    "indie publishing",
   ],
   authors: [{ name: "FatiBuClub", url: SITE_URL }],
   creator: "FatiBuClub",
@@ -44,35 +42,34 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/images/logo.png", type: "image/png", sizes: "600x150" },
+      { url: "/images/logo-mark.png", type: "image/png", sizes: "1024x1024" },
     ],
-    apple: [{ url: "/images/logo.png", sizes: "600x150" }],
+    apple: [{ url: "/images/logo-mark.png", sizes: "1024x1024" }],
   },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
     siteName: "FatiBuClub",
-    title: "FatiBuClub | Private Literary Society & Managed Reader Experience",
+    title: "FatiBuClub | Private Indie Reading Society for Independent Authors",
     description:
-      "A private literary society connecting independent authors with an engaged global reading community through a structured, year-long literary experience.",
+      "We connect independent authors with small, attentive reading circles for genuine reading, lively group discussion, and honest Goodreads reviews.",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "FatiBuClub — Where Intellectual Curiosity Meets Companionable Consideration",
+        alt: "FatiBuClub — Thoughtful Readers for Independent Books Worth Talking About",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "FatiBuClub | Private Literary Society",
+    title: "FatiBuClub | Private Indie Reading Society",
     description:
-      "A private literary society connecting independent authors with an engaged global reading community.",
+      "We connect independent authors with small, attentive reading circles for genuine reading, lively group discussion, and honest Goodreads reviews.",
     images: ["/og.png"],
   },
-  // Google Search Console verification.
   verification: {
     google: "HRFsJvVZGRvzf59l9ICfRgAaG2z0Zq_mSYRtt-4wnjs",
   },
@@ -90,8 +87,6 @@ export const metadata: Metadata = {
   category: "books",
 };
 
-// JSON-LD structured data — helps Google understand the site is an
-// Organization with a WebSite + SearchAction, improving rich results.
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -101,8 +96,9 @@ const jsonLd = {
       name: "FatiBuClub",
       url: SITE_URL,
       description:
-        "A private literary society connecting independent authors with an engaged global reading community through a structured, year-long literary experience.",
-      slogan: "Where Intellectual Curiosity Meets Companionable Consideration.",
+        "A private reading community for independent authors and thoughtful readers. We connect independent authors with small, attentive reading circles for genuine reading, lively group discussion, and honest Goodreads reviews.",
+      email: "fatibuclub@gmail.com",
+      slogan: "Thoughtful Readers for Independent Books Worth Talking About.",
       sameAs: [] as string[],
     },
     {
@@ -130,7 +126,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${spaceGrotesk.variable} ${inter.variable} font-body antialiased bg-bg text-ink selection:bg-accent selection:text-white`}
+        className={`${spaceGrotesk.variable} ${inter.variable} font-body antialiased bg-bg text-ink-body selection:bg-brand selection:text-white`}
       >
         {children}
         <Toaster />

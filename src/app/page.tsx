@@ -1,30 +1,26 @@
 import { Navbar } from "@/components/site/navbar";
 import { Hero } from "@/components/site/hero";
-import { AsSeenOn } from "@/components/site/as-seen-on";
-import { Philosophy } from "@/components/site/philosophy";
+import { About } from "@/components/site/about";
 import { Stats } from "@/components/site/stats";
-import { Timeline } from "@/components/site/timeline";
-import { Engagement } from "@/components/site/engagement";
-import { Committee } from "@/components/site/committee";
-import { HowWeOperate } from "@/components/site/how-we-operate";
-import { Voices } from "@/components/site/voices";
+import { HowItWorks } from "@/components/site/how-it-works";
+import { ReadingShelf } from "@/components/site/reading-shelf";
+import { Team } from "@/components/site/team";
+import { Transparency } from "@/components/site/transparency";
 import { ContactForm } from "@/components/site/contact-form";
 import { Footer } from "@/components/site/footer";
 
 export default function Home() {
   return (
-    <div className="flex min-h-[100svh] flex-col">
+    <div className="flex min-h-[100svh] flex-col overflow-x-hidden">
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <AsSeenOn />
-        <Philosophy />
+        <About />
         <Stats />
-        <Timeline />
-        <Engagement />
-        <Committee />
-        <HowWeOperate />
-        <Voices />
+        <HowItWorks />
+        <ReadingShelf />
+        <Team />
+        <Transparency />
         <ContactForm />
       </main>
       <Footer />

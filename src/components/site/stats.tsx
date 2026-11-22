@@ -1,50 +1,66 @@
 "use client";
 
+import * as React from "react";
+import { Card } from "./ui-atoms";
 import { Reveal, useCountUp } from "./primitives";
-import { DividerLine } from "./philosophy";
 
 type Stat = {
-  target: number;
-  suffix: string;
+  value: number | string;
   label: string;
   sub: string;
 };
 
 const STATS: Stat[] = [
   {
-    target: 21000,
-    suffix: "+",
-    label: "Global Hub Members",
-    sub: "An engaged, international reading community.",
+    value: 240,
+    label: "Community Members",
+    sub: "Readers from around the world who love discovering indie books.",
   },
   {
-    target: 2000,
-    suffix: "+",
-    label: "Active Social Salon Readers",
-    sub: "Readers participating in private discourse channels.",
+    value: 65,
+    label: "Active Readers",
+    sub: "Members actively joining monthly reading circles and discussions.",
   },
   {
-    target: 150,
-    suffix: "+",
-    label: "Average Goodreads Reviews per Selection",
-    sub: "Consistent review velocity across major platforms.",
+    value: 25,
+    label: "Average Readers Per Book",
+    sub: "Small enough for real discussion, big enough to spark momentum.",
   },
   {
-    target: 18,
-    suffix: "",
-    label: "Standout Authors Per Annual Cycle",
-    sub: "A deliberately limited, high-attention residency cohort.",
+    value: "1\u20132",
+    label: "Monthly Picks",
+    sub: "Selected carefully each month so every book gets real attention.",
   },
 ];
 
 export function Stats() {
   return (
-    <section className="sec-stats relative overflow-hidden py-24 sm:py-28 lg:py-32">
-      <DividerLine />
-      <div className="mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
-          {STATS.map((s, i) => (
-            <StatCell key={s.label} stat={s} index={i} />
+    <section id="community" className="bg-bg py-12 sm:py-16 md:py-18">
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+        {/* header */}
+        <Reveal>
+          <div className="flex flex-col items-center text-center">
+            <span className="eyebrow">Community Numbers</span>
+            <h2 className="mt-3 font-display font-semibold text-ink text-xl sm:text-2xl">
+              Readers Who Care
+            </h2>
+          </div>
+        </Reveal>
+
+        {/* grid — 2x2 on mobile, 4 cols on desktop */}
+        <div className="mt-8 sm:mt-10 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+          {STATS.map((stat, i) => (
+            <Reveal key={stat.label} delay={i * 0.08}>
+              <Card className="card-surface h-full rounded-2xl p-5 sm:p-6 text-center lg:text-left">
+                <StatValue value={stat.value} index={i} />
+                <p className="mt-3 font-display text-[14px] sm:text-[15px] font-semibold text-ink">
+                  {stat.label}
+                </p>
+                <p className="mt-1 text-[13px] text-ink-body leading-[1.5]">
+                  {stat.sub}
+                </p>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -52,35 +68,33 @@ export function Stats() {
   );
 }
 
-function StatCell({ stat, index }: { stat: Stat; index: number }) {
-  const { ref, display } = useCountUp(stat.target, {
-    suffix: stat.suffix,
-    duration: 1800 + index * 150,
-  });
+function StatValue({
+  value,
+  index,
+}: {
+  value: number | string;
+  index: number;
+}) {
+  if (typeof value === "string") {
+    return (
+      <p className="font-display text-[26px] sm:text-[30px] lg:text-[36px] font-bold text-brand leading-none tabular-nums">
+        {value}
+      </p>
+    );
+  }
+  return <StatNumber value={value} index={index} />;
+}
 
+function StatNumber({ value, index }: { value: number; index: number }) {
+  const { ref, display } = useCountUp(value, {
+    duration: 1400 + index * 120,
+  });
   return (
-    <div className="sec-stats group relative p-8 transition-colors duration-500 hover:bg-surface/60 sm:p-10 lg:p-12">
-      <div className="absolute right-6 top-6 font-display text-[11px] tabular-nums text-ink-faint">
-        0{index + 1}
-      </div>
-      <div className="flex flex-col">
-        <span
-          ref={ref}
-          className="font-display text-[clamp(3rem,8vw,5.5rem)] font-semibold leading-none tracking-tight text-gradient-ink"
-        >
-          {display}
-        </span>
-        <p className="mt-5 max-w-[16rem] font-display text-[15px] font-medium leading-snug text-ink sm:text-base">
-          {stat.label}
-        </p>
-        <p className="mt-2 text-[13px] leading-relaxed text-ink-muted">
-          {stat.sub}
-        </p>
-      </div>
-      <span
-        aria-hidden
-        className="absolute bottom-0 left-0 h-px w-0 bg-cream transition-all duration-700 ease-out group-hover:w-full"
-      />
-    </div>
+    <span
+      ref={ref}
+      className="block font-display text-[26px] sm:text-[30px] lg:text-[36px] font-bold text-brand leading-none tabular-nums"
+    >
+      {display}
+    </span>
   );
 }

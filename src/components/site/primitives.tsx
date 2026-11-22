@@ -10,9 +10,7 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-/* ----------------------------------------------------------------
-   Reveal — fade + slide entrance, triggered on scroll into view
-   ---------------------------------------------------------------- */
+/* Reveal — fade + slide entrance on scroll into view */
 type RevealProps = HTMLMotionProps<"div"> & {
   delay?: number;
   y?: number;
@@ -22,13 +20,13 @@ type RevealProps = HTMLMotionProps<"div"> & {
 export function Reveal({
   children,
   delay = 0,
-  y = 28,
+  y = 24,
   once = true,
   className,
   ...props
 }: RevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once, margin: "-12% 0px -12% 0px" });
+  const inView = useInView(ref, { once, margin: "-10% 0px -10% 0px" });
   const reduce = useReducedMotion();
 
   return (
@@ -36,7 +34,7 @@ export function Reveal({
       ref={ref}
       initial={reduce ? { opacity: 0 } : { opacity: 0, y }}
       animate={inView ? (reduce ? { opacity: 1 } : { opacity: 1, y: 0 }) : {}}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
       {...props}
     >
@@ -45,20 +43,17 @@ export function Reveal({
   );
 }
 
-/* Stagger container + item */
 export const staggerContainer: Variants = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
-  },
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
 };
 
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -93,14 +88,12 @@ export function StaggerItem({
   );
 }
 
-/* ----------------------------------------------------------------
-   useCountUp — animate a number when in view
-   ---------------------------------------------------------------- */
+/* useCountUp — gentle number animation */
 export function useCountUp(
   target: number,
-  options?: { duration?: number; decimals?: number; suffix?: string }
+  options?: { duration?: number; decimals?: number }
 ) {
-  const { duration = 2000, decimals = 0, suffix = "" } = options ?? {};
+  const { duration = 1400, decimals = 0 } = options ?? {};
   const ref = React.useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-15% 0px" });
   const reduce = useReducedMotion();
@@ -130,13 +123,11 @@ export function useCountUp(
     maximumFractionDigits: decimals,
   });
 
-  return { ref, display: `${formatted}${suffix}` };
+  return { ref, display: formatted };
 }
 
-/* ----------------------------------------------------------------
-   useScrollSpy — track which section is active for nav
-   ---------------------------------------------------------------- */
-export function useScrollSpy(ids: string[], offset = 140) {
+/* useScrollSpy — active nav tracking */
+export function useScrollSpy(ids: string[], offset = 120) {
   const [active, setActive] = React.useState<string>(ids[0] ?? "");
 
   React.useEffect(() => {
@@ -163,9 +154,7 @@ export function useScrollSpy(ids: string[], offset = 140) {
   return active;
 }
 
-/* ----------------------------------------------------------------
-   SectionHeader — editorial number + eyebrow + title
-   ---------------------------------------------------------------- */
+/* SectionHeader — eyebrow + title (no oversized numbers) */
 export function SectionHeader({
   index,
   eyebrow,
@@ -173,7 +162,7 @@ export function SectionHeader({
   className,
   align = "left",
 }: {
-  index: string;
+  index?: string;
   eyebrow: string;
   title: React.ReactNode;
   className?: string;
@@ -182,20 +171,22 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "flex flex-col gap-5",
+        "flex flex-col gap-3",
         align === "center" && "items-center text-center",
         className
       )}
     >
-      <Reveal className="flex items-center gap-4">
-        <span className="font-display text-sm font-medium text-cream tabular-nums">
-          {index}
-        </span>
-        <span className="h-px w-10 bg-line-strong" />
+      <Reveal className="flex items-center gap-3">
+        {index && (
+          <span className="font-display text-xs font-semibold text-brand tabular-nums">
+            {index}
+          </span>
+        )}
+        {index && <span className="h-px w-8 bg-sage-border" />}
         <span className="eyebrow">{eyebrow}</span>
       </Reveal>
-      <Reveal delay={0.08}>
-        <h2 className="font-display font-medium text-ink display-tight text-[clamp(2.2rem,5vw,4rem)]">
+      <Reveal delay={0.06}>
+        <h2 className="font-display font-semibold text-ink tracking-tight text-[clamp(1.4rem,3.5vw,2.25rem)] leading-tight">
           {title}
         </h2>
       </Reveal>
@@ -203,9 +194,7 @@ export function SectionHeader({
   );
 }
 
-/* ----------------------------------------------------------------
-   Eyebrow primitive
-   ---------------------------------------------------------------- */
+/* Eyebrow primitive */
 export function Eyebrow({
   children,
   className,
@@ -215,33 +204,7 @@ export function Eyebrow({
 }) {
   return (
     <span className={cn("eyebrow inline-flex items-center gap-2", className)}>
-      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-      {children}
-    </span>
-  );
-}
-
-/* ----------------------------------------------------------------
-   SectionNumber — giant outline number
-   ---------------------------------------------------------------- */
-export function SectionNumber({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <span
-      aria-hidden
-      className={cn(
-        "font-display font-semibold leading-none display-tighter text-[clamp(5rem,14vw,12rem)] text-transparent",
-        className
-      )}
-      style={{
-        WebkitTextStroke: "1.5px rgba(245,243,238,0.22)",
-      }}
-    >
+      <span className="h-1.5 w-1.5 rounded-full bg-brand" />
       {children}
     </span>
   );

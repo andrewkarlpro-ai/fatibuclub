@@ -3,10 +3,8 @@
 import * as React from "react";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import { Reveal } from "./primitives";
-import { ArrowNudge, Card } from "./ui-atoms";
-import { BackgroundImage } from "./background-image";
-import { DividerLine } from "./philosophy";
+import { Reveal, SectionHeader } from "./primitives";
+import { ArrowNudge } from "./ui-atoms";
 import { Loader2, Check } from "lucide-react";
 
 type FieldErrors = Record<string, string>;
@@ -28,7 +26,8 @@ export function ContactForm() {
     const payload = {
       name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
-      publication: String(data.get("publication") ?? ""),
+      book_title: String(data.get("book_title") ?? ""),
+      book_link: String(data.get("book_link") ?? ""),
       message: String(data.get("message") ?? ""),
     };
 
@@ -46,7 +45,7 @@ export function ContactForm() {
           setErrors(json.errors as FieldErrors);
         }
         toast({
-          title: "Submission needs review",
+          title: "Please review the fields",
           description:
             json.message ?? "Please correct the highlighted fields and retry.",
         });
@@ -59,12 +58,13 @@ export function ContactForm() {
       toast({
         title: "Submission received",
         description:
-          json.message ?? "The Selection Committee will be in touch.",
+          json.message ??
+          "We will reach out by email if your book fits an upcoming reading circle.",
       });
     } catch {
       toast({
-        title: "Something went wrong",
-        description: "Please try again in a moment.",
+        title: "Please review the fields",
+        description: "Something went wrong. Please try again in a moment.",
       });
       setStatus("idle");
     }
@@ -73,129 +73,113 @@ export function ContactForm() {
   return (
     <section
       id="contact"
-      className="sec-contact anchor relative overflow-hidden py-24 sm:py-32 lg:py-40"
+      className="anchor bg-bg-alt py-12 sm:py-16 md:py-18"
     >
-      <BackgroundImage
-        src="/images/bg-reader.png"
-        alt="Silhouette of a person reading in a dark room with warm lamp light."
-        tint="purple"
-        overlay={85}
-      />
-      <DividerLine />
-
-      {/* ambient glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 z-0 h-[500px] w-[700px] -translate-x-1/2 aura-accent opacity-20"
-      />
-
-      <div className="relative z-10 mx-auto mt-20 max-w-[1320px] px-5 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* LEFT — copy */}
-          <div className="lg:col-span-5">
-            <Reveal>
-              <div className="flex items-center gap-4">
-                <span className="font-display text-sm font-medium text-cream tabular-nums">
-                  08
-                </span>
-                <span className="h-px w-10 bg-line-strong" />
-                <span className="eyebrow">Selection Committee</span>
-              </div>
-            </Reveal>
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Left — copy */}
+          <div>
+            <SectionHeader
+              index="06"
+              eyebrow="Get in Touch"
+              title="Share Your Book With FatiBuClub"
+              className="mb-5 sm:mb-6"
+            />
             <Reveal delay={0.06}>
-              <h2 className="mt-6 font-display font-medium text-ink display-tight text-[clamp(2.4rem,5.5vw,4.2rem)]">
-                Connect with the Selection Committee
-              </h2>
-            </Reveal>
-            <Reveal delay={0.12}>
-              <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ink-muted sm:text-[17px]">
-                To maintain the exceptional quality of our high-signal social
-                salons, our infrastructure only accommodates 18 standout authors
-                per annual cycle. If you are an independent author whose work
-                aligns with our mission of uncovering meaningful ingredients in
-                overlooked places, please submit your contact and publication
-                details below for committee consideration.
+              <p className="max-w-2xl text-[15px] text-ink-body leading-[1.7]">
+                Writing an indie thriller, memoir, literary novel, or
+                historical story? Send us your book title, Goodreads or Amazon
+                link, and a quick note about what inspired it. We read every
+                message personally.
               </p>
             </Reveal>
-
-            <Reveal delay={0.18}>
-              <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-cream/30 bg-cream/[0.06] px-4 py-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-cream" />
-                <span className="text-[13px] font-medium text-cream">
-                  18 standout authors per annual cycle.
-                </span>
-              </div>
-            </Reveal>
           </div>
 
-          {/* RIGHT — form panel */}
-          <div className="lg:col-span-7">
-            <Reveal delay={0.1}>
-              <Card className="p-6 sm:p-8 lg:p-10">
-                {status === "success" ? (
-                  <SuccessState onReset={() => setStatus("idle")} />
-                ) : (
-                  <form onSubmit={onSubmit} noValidate className="flex flex-col gap-5">
-                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                      <Field
-                        label="Name"
-                        name="name"
-                        type="text"
-                        placeholder="Your full name"
-                        autoComplete="name"
-                        error={errors.name}
-                      />
-                      <Field
-                        label="Email"
-                        name="email"
-                        type="email"
-                        placeholder="you@example.com"
-                        autoComplete="email"
-                        error={errors.email}
-                      />
-                    </div>
+          {/* Right — form card */}
+          <Reveal delay={0.1}>
+            <div className="card-surface rounded-2xl p-5 sm:p-6 lg:p-8 max-w-2xl mx-auto w-full">
+              {status === "success" ? (
+                <SuccessState onReset={() => setStatus("idle")} />
+              ) : (
+                <form
+                  onSubmit={onSubmit}
+                  noValidate
+                  className="flex flex-col gap-4"
+                >
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Field
-                      label="Book / Publication Details"
-                      name="publication"
+                      label="Author Name"
+                      name="name"
                       type="text"
-                      placeholder="Title, genre, and current publication status"
-                      error={errors.publication}
+                      placeholder="Your full name"
+                      autoComplete="name"
+                      error={errors.name}
                     />
-                    <FieldArea
-                      label="Message"
-                      name="message"
-                      placeholder="A brief note on your work and why it aligns with FatiBuClub."
-                      error={errors.message}
+                    <Field
+                      label="Email"
+                      name="email"
+                      type="email"
+                      placeholder="you@example.com"
+                      autoComplete="email"
+                      error={errors.email}
                     />
+                  </div>
+                  <Field
+                    label="Book Title"
+                    name="book_title"
+                    type="text"
+                    placeholder="Title of your book"
+                    error={errors.book_title}
+                  />
+                  <Field
+                    label="Book Link"
+                    name="book_link"
+                    type="url"
+                    placeholder="Goodreads or Amazon URL"
+                    error={errors.book_link}
+                  />
+                  <FieldArea
+                    label="Short Note"
+                    name="message"
+                    placeholder="A quick note about what inspired your book."
+                    error={errors.message}
+                  />
 
-                    <div className="mt-2 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-                      <p className="text-[12px] text-ink-muted">
-                        We respond to qualified submissions only.
-                      </p>
-                      <button
-                        type="submit"
-                        disabled={status === "loading"}
-                        className="group inline-flex items-center justify-center gap-2 rounded-full bg-cream px-7 py-3.5 text-[15px] font-medium text-bg shadow-[0_8px_30px_-12px_rgba(244,215,122,0.6)] transition-all duration-300 hover:bg-cream-deep hover:shadow-[0_10px_40px_-10px_rgba(244,215,122,0.7)] disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
-                      >
-                        {status === "loading" ? (
-                          <>
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                            Submitting…
-                          </>
-                        ) : (
-                          <>
-                            Submit for Committee Consideration
-                            <ArrowNudge />
-                          </>
-                        )}
-                      </button>
-                    </div>
-                  </form>
-                )}
-              </Card>
-            </Reveal>
-          </div>
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand text-white px-6 py-3 text-[14px] font-medium min-h-[44px] hover:bg-brand-dark transition-all disabled:opacity-60"
+                  >
+                    {status === "loading" ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Submitting…
+                      </>
+                    ) : (
+                      <>
+                        Submit Your Book
+                        <ArrowNudge />
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
+          </Reveal>
         </div>
+
+        {/* Direct email line */}
+        <Reveal delay={0.12}>
+          <p className="mt-6 text-center text-[14px] text-ink-body">
+            Prefer email? Reach us directly at{" "}
+            <a
+              href="mailto:fatibuclub@gmail.com"
+              className="text-brand font-medium hover:underline"
+            >
+              fatibuclub@gmail.com
+            </a>
+          </p>
+        </Reveal>
       </div>
     </section>
   );
@@ -219,10 +203,10 @@ function Field({
 }) {
   const id = `field-${name}`;
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1.5">
       <label
         htmlFor={id}
-        className="text-[12px] font-medium uppercase tracking-[0.16em] text-ink-muted"
+        className="text-[12px] font-semibold uppercase tracking-wide text-ink-body"
       >
         {label}
       </label>
@@ -235,12 +219,12 @@ function Field({
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          "h-12 w-full rounded-xl border bg-bg/60 px-4 text-[15px] text-ink placeholder:text-ink-faint transition-all duration-200 outline-none focus:border-cream/60 focus:bg-bg focus:ring-2 focus:ring-cream/20",
-          error ? "border-destructive/70" : "border-line-strong"
+          "h-11 w-full rounded-xl border border-sage bg-surface px-4 text-[15px] text-ink placeholder:text-ink-faint transition-all outline-none focus:border-brand focus:ring-2 focus:ring-brand/20",
+          error && "border-danger focus:border-danger focus:ring-danger/20"
         )}
       />
       {error && (
-        <span id={`${id}-error`} className="text-[12px] text-destructive">
+        <span id={`${id}-error`} className="text-[12px] text-danger">
           {error}
         </span>
       )}
@@ -261,10 +245,10 @@ function FieldArea({
 }) {
   const id = `field-${name}`;
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1.5">
       <label
         htmlFor={id}
-        className="text-[12px] font-medium uppercase tracking-[0.16em] text-ink-muted"
+        className="text-[12px] font-semibold uppercase tracking-wide text-ink-body"
       >
         {label}
       </label>
@@ -276,12 +260,12 @@ function FieldArea({
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          "w-full resize-none rounded-xl border bg-bg/60 px-4 py-3 text-[15px] text-ink placeholder:text-ink-faint transition-all duration-200 outline-none focus:border-cream/60 focus:bg-bg focus:ring-2 focus:ring-cream/20",
-          error ? "border-destructive/70" : "border-line-strong"
+          "min-h-[110px] w-full resize-none rounded-xl border border-sage bg-surface px-4 py-3 text-[15px] text-ink placeholder:text-ink-faint transition-all outline-none focus:border-brand focus:ring-2 focus:ring-brand/20",
+          error && "border-danger focus:border-danger focus:ring-danger/20"
         )}
       />
       {error && (
-        <span id={`${id}-error`} className="text-[12px] text-destructive">
+        <span id={`${id}-error`} className="text-[12px] text-danger">
           {error}
         </span>
       )}
@@ -291,23 +275,23 @@ function FieldArea({
 
 function SuccessState({ onReset }: { onReset: () => void }) {
   return (
-    <div className="flex flex-col items-center py-10 text-center">
-      <div className="flex h-16 w-16 items-center justify-center rounded-full border border-cream/40 bg-cream/10">
-        <Check className="h-7 w-7 text-cream" />
+    <div className="flex flex-col items-center py-8 text-center">
+      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-sage text-brand">
+        <Check className="h-7 w-7" />
       </div>
-      <h3 className="mt-6 font-display text-2xl font-medium text-ink">
-        Submission received
+      <h3 className="mt-5 font-display text-2xl font-bold text-ink">
+        Thank you — your book is in.
       </h3>
-      <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-ink-muted">
-        Thank you. Your details have been forwarded to the Selection Committee
-        for consideration. We will be in touch.
+      <p className="mt-3 max-w-sm text-[15px] leading-[1.6] text-ink-body">
+        We read every submission personally and will reach out by email if
+        your book fits an upcoming reading circle.
       </p>
       <button
         type="button"
         onClick={onReset}
-        className="mt-7 text-[13px] font-medium text-cream underline-offset-4 hover:underline"
+        className="mt-6 text-[14px] font-medium text-brand underline-offset-4 hover:underline"
       >
-        Submit another entry
+        Submit another book
       </button>
     </div>
   );

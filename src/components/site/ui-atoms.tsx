@@ -3,11 +3,9 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-/* ----------------------------------------------------------------
-   Pill CTA — primary (cream) and secondary (outline)
-   Used as anchor links for smooth in-page navigation.
-   ---------------------------------------------------------------- */
-type PillProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+/* PillLink — primary (green) and secondary (outlined green) CTA.
+   Standard comfortable tap height (44-46px), 14-15px font. */
+type PillLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   variant?: "primary" | "secondary";
   size?: "md" | "lg";
   children: React.ReactNode;
@@ -19,16 +17,17 @@ export function PillLink({
   className,
   children,
   ...props
-}: PillProps) {
+}: PillLinkProps) {
   return (
     <a
       className={cn(
-        "group relative inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-300 ease-out outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
-        size === "lg" ? "px-7 py-3.5 text-[15px]" : "px-5 py-2.5 text-[13px]",
+        "group relative inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-300 ease-out outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
+        size === "lg" ? "px-6 py-3 text-[15px]" : "px-[22px] py-3 text-[14px]",
+        "min-h-[44px]",
         variant === "primary" &&
-          "bg-cream text-bg hover:bg-cream-deep shadow-[0_8px_30px_-12px_rgba(244,215,122,0.6)] hover:shadow-[0_10px_40px_-10px_rgba(244,215,122,0.7)]",
+          "bg-brand text-white hover:bg-brand-dark shadow-[0_4px_20px_-4px_rgba(46,125,82,0.4)] hover:shadow-[0_6px_24px_-4px_rgba(46,125,82,0.5)]",
         variant === "secondary" &&
-          "border border-line-strong text-ink hover:border-ink/40 hover:bg-white/[0.03]",
+          "border border-brand text-brand bg-transparent hover:bg-sage hover:text-brand-dark",
         className
       )}
       {...props}
@@ -38,7 +37,7 @@ export function PillLink({
   );
 }
 
-/* Icon arrow that nudges on hover */
+/* Arrow that nudges on hover */
 export function ArrowNudge({ className }: { className?: string }) {
   return (
     <span
@@ -67,9 +66,7 @@ export function ArrowNudge({ className }: { className?: string }) {
   );
 }
 
-/* ----------------------------------------------------------------
-   Card — rounded, thin border, subtle gradient surface
-   ---------------------------------------------------------------- */
+/* Standard card — white surface, sage border, subtle shadow */
 export function Card({
   children,
   className,
@@ -79,9 +76,9 @@ export function Card({
   return (
     <div
       className={cn(
-        "surface-card rounded-2xl",
+        "card-surface rounded-2xl",
         hover &&
-          "transition-all duration-500 ease-out hover:-translate-y-1 hover:border-line-strong hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)]",
+          "transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_2px_8px_rgba(28,43,34,0.06),0_8px_28px_rgba(46,125,82,0.1)] hover:border-brand",
         className
       )}
       {...props}
