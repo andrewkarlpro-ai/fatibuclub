@@ -3,32 +3,26 @@
 
 /* ===========================================================
    FatiBuClub — Bright Green & Cream Literary Community
-   Warm, airy, trustworthy. Light theme only.
+   Clean, bulletproof, standard Tailwind only. No hacks.
    =========================================================== */
 
 @theme inline {
-  /* Brand palette — bright botanical green + warm cream */
-  --color-bg: #fbfdfb;            /* crisp warm off-white (primary bg) */
-  --color-bg-alt: #f3f8f4;        /* soft sage cream (alternating sections) */
-  --color-surface: #ffffff;        /* white cards */
-  --color-sage: #e6f2ea;           /* soft sage green fill (cards/tags) */
-  --color-sage-border: #d1e5d8;   /* gentle sage borders */
-  --color-brand: #2e7d52;          /* fresh botanical / leaf green (primary) */
-  --color-brand-dark: #246a45;    /* hover/darker green */
-  --color-brand-soft: #e6f2ea;    /* soft sage accent */
-  --color-ink: #1c2b22;            /* deep slate-charcoal green (headings) */
-  --color-ink-body: #46584e;      /* muted charcoal (body copy) */
-  --color-ink-faint: #7a8a82;      /* faint muted text */
-  --color-cream: #f4d77a;          /* warm cream (retained for occasional accent) */
-  --color-sunshine: #fef3c7;      /* soft warm yellow for section backgrounds */
-  --color-sunshine-deep: #fde68a; /* deeper warm yellow */
-  --color-sunshine-border: #fcd34d; /* yellow border accent */
-  --color-line: #d1e5d8;           /* default border = sage */
-  --color-line-strong: #b8d4c2;    /* stronger sage border */
+  /* Brand palette */
+  --color-bg: #fbfdfb;
+  --color-bg-alt: #f2f8f3;
+  --color-surface: #ffffff;
+  --color-sage: #e6f2ea;
+  --color-sage-border: #d1e5d8;
+  --color-brand: #2e7d52;
+  --color-brand-dark: #246a45;
+  --color-ink: #1c2b22;
+  --color-ink-body: #46584e;
+  --color-ink-faint: #7a8a82;
+  --color-sunshine: #fef3c7;
+  --color-line: #d1e5d8;
   --color-danger: #c0392b;
-  --color-success: #2e7d52;
 
-  /* shadcn-compatible mappings */
+  /* shadcn mappings */
   --color-background: var(--color-bg);
   --color-foreground: var(--color-ink);
   --color-card: var(--color-surface);
@@ -47,19 +41,6 @@
   --color-border: var(--color-line);
   --color-input: var(--color-line);
   --color-ring: var(--color-brand);
-  --color-chart-1: var(--color-brand);
-  --color-chart-2: var(--color-cream);
-  --color-chart-3: #8b85ff;
-  --color-chart-4: #f4d77a;
-  --color-chart-5: #a8aab6;
-  --color-sidebar: var(--color-bg-alt);
-  --color-sidebar-foreground: var(--color-ink);
-  --color-sidebar-primary: var(--color-brand);
-  --color-sidebar-primary-foreground: #ffffff;
-  --color-sidebar-accent: var(--color-sage);
-  --color-sidebar-accent-foreground: var(--color-ink);
-  --color-sidebar-border: var(--color-line);
-  --color-sidebar-ring: var(--color-brand);
 
   /* Fonts */
   --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
@@ -67,14 +48,10 @@
   --font-sans: var(--font-body);
 
   --radius-sm: 8px;
-  --radius-md: 12px;
+  --radius-md: 10px;
   --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
 
   --shadow-card: 0 1px 3px rgba(28, 43, 34, 0.04), 0 4px 16px rgba(28, 43, 34, 0.05);
-  --shadow-card-hover: 0 2px 8px rgba(28, 43, 34, 0.06), 0 8px 28px rgba(46, 125, 82, 0.1);
-  --shadow-brand-glow: 0 4px 20px -4px rgba(46, 125, 82, 0.4);
 }
 
 :root {
@@ -82,25 +59,32 @@
 }
 
 @layer base {
-  * {
-    border-color: var(--color-line);
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
   body {
     background-color: var(--color-bg);
     color: var(--color-ink-body);
     font-family: var(--font-body);
     overflow-x: hidden;
+    margin: 0;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
   }
   ::selection {
     background: var(--color-brand);
     color: #fff;
   }
-  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -119,36 +103,7 @@
 }
 
 /* ===========================================================
-   Mobile-first compact sizing (< 640px)
-   Forces tight editorial scale, overrides oversized defaults.
-   =========================================================== */
-@media (max-width: 639px) {
-  html {
-    font-size: 15px;
-  }
-  body {
-    font-size: 13.5px;
-    line-height: 1.55;
-  }
-  /* Force sections to compact vertical padding */
-  section {
-    padding-top: 32px !important;
-    padding-bottom: 32px !important;
-  }
-  /* Hero gets its own padding handled inline, but cap min-height */
-  #top {
-    min-height: auto !important;
-    padding-top: 80px !important;
-    padding-bottom: 24px !important;
-  }
-  /* Eyebrow / labels: 11px on mobile */
-  .eyebrow {
-    font-size: 11px !important;
-  }
-}
-
-/* ===========================================================
-   Utilities & helpers
+   Utilities — clean, standard, no hacks
    =========================================================== */
 @layer utilities {
   .font-display {
@@ -157,170 +112,55 @@
   .font-body {
     font-family: var(--font-body);
   }
-
-  /* Eyebrow / label */
   .eyebrow {
     font-family: var(--font-body);
     text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 12px;
+    letter-spacing: 0.14em;
+    font-size: 11px;
     font-weight: 600;
     color: var(--color-brand);
   }
-
-  /* Headings use deep slate-charcoal green, never pure black */
-  .text-ink {
-    color: var(--color-ink);
-  }
-  .text-ink-body {
-    color: var(--color-ink-body);
-  }
-  .text-ink-faint {
-    color: var(--color-ink-faint);
-  }
-  .text-brand {
-    color: var(--color-brand);
-  }
-  .bg-brand {
-    background-color: var(--color-brand);
-  }
-  .bg-sage {
-    background-color: var(--color-sage);
-  }
-  .bg-bg-alt {
-    background-color: var(--color-bg-alt);
-  }
-  .bg-sunshine {
-    background-color: var(--color-sunshine);
-  }
-  .bg-sunshine-deep {
-    background-color: var(--color-sunshine-deep);
-  }
-  .border-sage {
-    border-color: var(--color-sage-border);
-  }
-  .border-sunshine {
-    border-color: var(--color-sunshine-border);
-  }
-
-  /* Section anchor offset for sticky nav */
-  .anchor {
-    scroll-margin-top: 80px;
-  }
-
-  /* Standard card surface — white with sage border + subtle shadow (compact, 10px radius) */
+  .text-ink { color: var(--color-ink); }
+  .text-ink-body { color: var(--color-ink-body); }
+  .text-ink-faint { color: var(--color-ink-faint); }
+  .text-brand { color: var(--color-brand); }
+  .bg-brand { background-color: var(--color-brand); }
+  .bg-sage { background-color: var(--color-sage); }
+  .bg-bg-alt { background-color: var(--color-bg-alt); }
+  .bg-sunshine { background-color: var(--color-sunshine); }
+  .border-sage { border-color: var(--color-sage-border); }
+  .anchor { scroll-margin-top: 72px; }
   .card-surface {
     background: var(--color-surface);
     border: 1px solid var(--color-sage-border);
-    box-shadow: var(--shadow-card);
     border-radius: 10px;
+    box-shadow: var(--shadow-card);
   }
-
-  /* Animated underline link */
   .nav-link {
-    position: relative;
     color: var(--color-ink-body);
     transition: color 0.3s ease;
-  }
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    height: 2px;
-    width: 100%;
-    background: var(--color-brand);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
   }
   .nav-link:hover,
   .nav-link[data-active="true"] {
     color: var(--color-ink);
   }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 2px;
+    width: 100%;
+    background: var(--color-brand);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
   .nav-link:hover::after,
   .nav-link[data-active="true"]::after {
     transform: scaleX(1);
     transform-origin: left;
-  }
-
-  /* Marquee (for future use) */
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  .animate-marquee {
-    animation: marquee 38s linear infinite;
-  }
-
-  /* Float (gentle) */
-  @keyframes float-y {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-  .animate-float {
-    animation: float-y 6s ease-in-out infinite;
-  }
-  @keyframes float-y-slow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-  }
-  .animate-float-slow {
-    animation: float-y-slow 9s ease-in-out infinite;
-  }
-
-  /* Pulse dot */
-  @keyframes pulse-ring {
-    0% { box-shadow: 0 0 0 0 rgba(46, 125, 82, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(46, 125, 82, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(46, 125, 82, 0); }
-  }
-  .pulse-dot {
-    animation: pulse-ring 2.4s ease-out infinite;
-  }
-
-  /* Hairline divider */
-  .hairline {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-sage-border), transparent);
-  }
-
-  /* Scroll indicator */
-  @keyframes scroll-cue {
-    0% { transform: translateY(0); opacity: 0; }
-    40% { opacity: 1; }
-    100% { transform: translateY(8px); opacity: 0; }
-  }
-  .animate-scroll-cue {
-    animation: scroll-cue 1.8s ease-in-out infinite;
-  }
-
-  /* Gradient shift — animated brand gradient for accents */
-  @keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-  .animate-gradient {
-    background-size: 200% 200%;
-    animation: gradient-shift 8s ease infinite;
-  }
-
-  /* Slow spin — for decorative rings */
-  @keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  .animate-spin-slow {
-    animation: spin-slow 20s linear infinite;
-  }
-
-  /* Shimmer — for subtle highlight sweeps */
-  @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-  }
-  .animate-shimmer {
-    animation: shimmer 3s ease-in-out infinite;
   }
 }
 
@@ -331,6 +171,5 @@
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
   }
 }

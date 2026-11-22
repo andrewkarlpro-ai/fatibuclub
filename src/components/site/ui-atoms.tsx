@@ -3,11 +3,10 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-/* PillLink — compact slim buttons (38px height, 13px text on mobile).
-   Primary = green fill, Secondary = green outline. */
+/* PillLink — compact buttons. Primary = green, Secondary = outline. */
 type PillLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   variant?: "primary" | "secondary";
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md";
   children: React.ReactNode;
 };
 
@@ -21,19 +20,15 @@ export function PillLink({
   return (
     <a
       className={cn(
-        "group relative inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-300 ease-out outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
-        "h-[38px] px-4 text-[13px]",
-        size === "lg" && "sm:h-[42px] sm:px-5 sm:text-[14px]",
-        size === "sm" && "h-[36px] px-3.5 text-[12px]",
-        variant === "primary" &&
-          "bg-brand text-white hover:bg-brand-dark shadow-[0_4px_14px_-4px_rgba(46,125,82,0.4)] hover:shadow-[0_6px_18px_-4px_rgba(46,125,82,0.5)]",
-        variant === "secondary" &&
-          "border border-brand text-brand bg-transparent hover:bg-sage hover:text-brand-dark",
+        "inline-flex items-center justify-center gap-1.5 rounded-full font-medium transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2",
+        size === "sm" ? "h-9 px-4 text-[13px]" : "h-10 px-5 text-[13px]",
+        variant === "primary" && "bg-brand text-white hover:bg-brand-dark",
+        variant === "secondary" && "border border-brand text-brand hover:bg-sage",
         className
       )}
       {...props}
     >
-      <span className="relative z-10 flex items-center gap-1.5">{children}</span>
+      {children}
     </a>
   );
 }
@@ -42,7 +37,7 @@ export function ArrowNudge({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        "inline-flex translate-x-0 transition-transform duration-300 group-hover:translate-x-1",
+        "inline-block transition-transform duration-200 group-hover:translate-x-0.5",
         className
       )}
       aria-hidden
@@ -54,24 +49,14 @@ export function ArrowNudge({ className }: { className?: string }) {
   );
 }
 
-/* Compact card — white surface, sage border, subtle shadow.
-   Tight padding (14px / p-3.5), 10px radius. */
+/* Card — clean white surface, sage border, subtle shadow */
 export function Card({
   children,
   className,
-  hover = false,
   ...props
-}: React.HTMLAttributes<HTMLDivElement> & { hover?: boolean }) {
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div
-      className={cn(
-        "card-surface rounded-[10px]",
-        hover &&
-          "transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(28,43,34,0.06),0_6px_20px_rgba(46,125,82,0.1)] hover:border-brand",
-        className
-      )}
-      {...props}
-    >
+    <div className={cn("card-surface", className)} {...props}>
       {children}
     </div>
   );

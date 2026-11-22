@@ -3,12 +3,21 @@
 import * as React from "react";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { Reveal, SectionHeader } from "./primitives";
-import { ArrowNudge } from "./ui-atoms";
-import { PhotoBanner } from "./background-image";
+import { Card, ArrowNudge } from "./ui-atoms";
 import { Loader2, Check } from "lucide-react";
 
+/* Section 07 · Get in Touch — community photo + book submission form.
+   Posts to /api/contact (sends { name, email, book_title, book_link, message }).
+   Response: ok:true = success; errors = validation map. */
+
 type FieldErrors = Record<string, string>;
+
+const INPUT_CLASS =
+  "h-10 w-full rounded-lg border border-sage bg-white px-3 text-sm text-ink placeholder:text-ink-faint outline-none focus:border-brand focus:ring-2 focus:ring-brand/20";
+
+const LABEL_CLASS = "text-xs font-semibold uppercase tracking-wide text-ink-body mb-1";
 
 export function ContactForm() {
   const { toast } = useToast();
@@ -72,50 +81,71 @@ export function ContactForm() {
   }
 
   return (
-    <section
-      id="contact"
-      className="anchor bg-bg-alt"
-    >
-      <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* Left — copy */}
+    <section id="contact" className="anchor bg-bg-alt py-10 sm:py-16">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+          {/* Left — copy + community photo */}
           <div>
             <SectionHeader
               index="07"
               eyebrow="Get in Touch"
               title="Share Your Book With FatiBuClub"
-              className="mb-3 sm:mb-4"
+              className="mb-3"
             />
-            <Reveal delay={0.05}>
-              <p className="max-w-lg text-[13.5px] leading-[1.55] text-ink-body sm:text-[15px] sm:leading-[1.6]">
-                Writing an indie thriller, memoir, literary novel, or
-                historical story? Send us your book title, Goodreads or Amazon
-                link, and a quick note about what inspired it. We read every
-                message personally.
-              </p>
-            </Reveal>
-            {/* Community photo banner — 100% opacity */}
-            <Reveal delay={0.08}>
-              <PhotoBanner
+            <p className="text-sm text-ink-body leading-relaxed">
+              Writing an indie thriller, memoir, literary novel, or historical
+              story? Send us your book title, Goodreads or Amazon link, and a
+              quick note about what inspired it. We read every message
+              personally.
+            </p>
+
+            <div className="mt-4 relative w-full h-44 sm:h-56 rounded-xl overflow-hidden border border-sage">
+              <Image
                 src="/images/bg-community.png"
                 alt="A bright community of readers enjoying books together in a sunlit room."
-                className="mt-4 h-40 sm:h-56"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
-            </Reveal>
+            </div>
+
+            <p className="mt-3 text-sm text-ink-body">
+              Prefer email? Reach us at{" "}
+              <a
+                href="mailto:fatibuclub@gmail.com"
+                className="text-brand font-medium underline"
+              >
+                fatibuclub@gmail.com
+              </a>
+            </p>
           </div>
 
           {/* Right — form card */}
-          <Reveal delay={0.1}>
-            <div className="card-surface p-4 sm:p-5 max-w-2xl mx-auto w-full">
+          <Reveal delay={0.06}>
+            <Card className="p-4 sm:p-5">
               {status === "success" ? (
-                <SuccessState onReset={() => setStatus("idle")} />
+                <div className="text-center py-6">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-sage text-brand">
+                    <Check className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-4 font-display text-lg font-semibold text-ink">
+                    Thank you — your book is in.
+                  </h3>
+                  <p className="mt-2 text-sm text-ink-body leading-relaxed">
+                    We read every submission personally and will reach out by
+                    email if your book fits an upcoming reading circle.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setStatus("idle")}
+                    className="mt-4 text-sm text-brand font-medium underline-offset-4 hover:underline"
+                  >
+                    Submit another book
+                  </button>
+                </div>
               ) : (
-                <form
-                  onSubmit={onSubmit}
-                  noValidate
-                  className="flex flex-col gap-2.5"
-                >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <form onSubmit={onSubmit} noValidate className="flex flex-col gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <Field
                       label="Author Name"
                       name="name"
@@ -157,7 +187,7 @@ export function ContactForm() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand text-white px-4 py-2 text-[13px] font-medium h-[38px] hover:bg-brand-dark transition-all disabled:opacity-60"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-brand text-white h-10 px-5 text-sm font-medium hover:bg-brand-dark transition-colors disabled:opacity-60"
                   >
                     {status === "loading" ? (
                       <>
@@ -166,29 +196,15 @@ export function ContactForm() {
                       </>
                     ) : (
                       <>
-                        Submit Your Book
-                        <ArrowNudge />
+                        Submit Your Book <ArrowNudge />
                       </>
                     )}
                   </button>
                 </form>
               )}
-            </div>
+            </Card>
           </Reveal>
         </div>
-
-        {/* Direct email line */}
-        <Reveal delay={0.12}>
-          <p className="mt-6 text-center text-[14px] text-ink-body">
-            Prefer email? Reach us directly at{" "}
-            <a
-              href="mailto:fatibuclub@gmail.com"
-              className="text-brand font-medium hover:underline"
-            >
-              fatibuclub@gmail.com
-            </a>
-          </p>
-        </Reveal>
       </div>
     </section>
   );
@@ -212,11 +228,8 @@ function Field({
 }) {
   const id = `field-${name}`;
   return (
-    <div className="flex flex-col gap-1">
-      <label
-        htmlFor={id}
-        className="text-[11px] font-semibold uppercase tracking-wide text-ink-body"
-      >
+    <div className="flex flex-col">
+      <label htmlFor={id} className={LABEL_CLASS}>
         {label}
       </label>
       <input
@@ -227,13 +240,10 @@ function Field({
         autoComplete={autoComplete}
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-error` : undefined}
-        className={cn(
-          "h-[38px] w-full rounded-[10px] border border-sage bg-surface px-3 text-[13.5px] text-ink placeholder:text-ink-faint transition-all outline-none focus:border-brand focus:ring-2 focus:ring-brand/20",
-          error && "border-danger focus:border-danger focus:ring-danger/20"
-        )}
+        className={cn(INPUT_CLASS, error && "border-danger focus:border-danger focus:ring-danger/20")}
       />
       {error && (
-        <span id={`${id}-error`} className="text-[11px] text-danger">
+        <span id={`${id}-error`} className="text-xs text-danger mt-1">
           {error}
         </span>
       )}
@@ -254,11 +264,8 @@ function FieldArea({
 }) {
   const id = `field-${name}`;
   return (
-    <div className="flex flex-col gap-1">
-      <label
-        htmlFor={id}
-        className="text-[11px] font-semibold uppercase tracking-wide text-ink-body"
-      >
+    <div className="flex flex-col">
+      <label htmlFor={id} className={LABEL_CLASS}>
         {label}
       </label>
       <textarea
@@ -269,39 +276,15 @@ function FieldArea({
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          "w-full resize-none rounded-[10px] border border-sage bg-surface px-3 py-2 text-[13.5px] text-ink placeholder:text-ink-faint transition-all outline-none focus:border-brand focus:ring-2 focus:ring-brand/20",
+          "w-full resize-none rounded-lg border border-sage bg-white px-3 py-2 text-sm text-ink placeholder:text-ink-faint outline-none focus:border-brand focus:ring-2 focus:ring-brand/20",
           error && "border-danger focus:border-danger focus:ring-danger/20"
         )}
       />
       {error && (
-        <span id={`${id}-error`} className="text-[12px] text-danger">
+        <span id={`${id}-error`} className="text-xs text-danger mt-1">
           {error}
         </span>
       )}
-    </div>
-  );
-}
-
-function SuccessState({ onReset }: { onReset: () => void }) {
-  return (
-    <div className="flex flex-col items-center py-8 text-center">
-      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-sage text-brand">
-        <Check className="h-7 w-7" />
-      </div>
-      <h3 className="mt-5 font-display text-2xl font-bold text-ink">
-        Thank you — your book is in.
-      </h3>
-      <p className="mt-3 max-w-sm text-[15px] leading-[1.6] text-ink-body">
-        We read every submission personally and will reach out by email if
-        your book fits an upcoming reading circle.
-      </p>
-      <button
-        type="button"
-        onClick={onReset}
-        className="mt-6 text-[14px] font-medium text-brand underline-offset-4 hover:underline"
-      >
-        Submit another book
-      </button>
     </div>
   );
 }

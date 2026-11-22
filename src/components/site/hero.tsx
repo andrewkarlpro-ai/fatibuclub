@@ -1,39 +1,37 @@
 "use client";
 
+import Image from "next/image";
 import { Reveal } from "./primitives";
 import { PillLink, ArrowNudge } from "./ui-atoms";
-import { PhotoBanner } from "./background-image";
-
-/* Hero — compact (pt-20 pb-6 on mobile). Bookshelf photo as a 100%-opacity
-   clean rounded banner: below CTAs on mobile, beside text on desktop. */
 
 const RIBBON_STATS: { value: string; label: string }[] = [
-  { value: "1,240", label: "members" },
-  { value: "450", label: "active readers" },
-  { value: "150", label: "avg readers per book" },
+  { value: "1,240", label: "Community Members" },
+  { value: "450", label: "Active Readers" },
+  { value: "150", label: "Avg Readers Per Book" },
+  { value: "Est. 2018", label: "Since 2018" },
 ];
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden bg-bg pt-20 pb-6 sm:pt-24 sm:pb-8">
-      <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-2 lg:gap-10">
+    <section id="top" className="bg-bg pt-20 pb-8 sm:pt-24 sm:pb-10">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2">
           {/* LEFT — copy */}
           <div>
             <Reveal>
-              <span className="eyebrow text-[11px]">
+              <span className="eyebrow">
                 FatiBuClub · Private Indie Reading Society · Est. 2018
               </span>
             </Reveal>
 
             <Reveal delay={0.05}>
-              <h1 className="mt-3 font-display font-semibold text-ink tracking-tight text-[25px] leading-[1.18] sm:text-[clamp(1.75rem,4vw,2.875rem)] sm:leading-[1.12]">
+              <h1 className="mt-3 font-display font-bold text-ink tracking-tight text-2xl leading-tight sm:text-4xl">
                 Thoughtful Readers for Independent Books Worth Talking About.
               </h1>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <p className="mt-2.5 max-w-md text-[13.5px] leading-[1.55] text-ink-body sm:text-[15px] sm:leading-[1.6]">
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-ink-body sm:text-base">
                 We connect independent authors with small, attentive reading
                 circles for genuine reading, lively group discussion, and honest
                 Goodreads reviews.
@@ -41,42 +39,45 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={0.16}>
-              <div className="mt-4 flex flex-wrap items-center gap-2.5">
-                <PillLink href="#contact" size="md">
+              <div className="mt-5 flex flex-wrap gap-3">
+                <PillLink href="#contact">
                   Share Your Book With Us <ArrowNudge />
                 </PillLink>
-                <PillLink href="#how-it-works" variant="secondary" size="md">
+                <PillLink href="#how-it-works" variant="secondary">
                   See How It Works
                 </PillLink>
               </div>
             </Reveal>
-
-            {/* Slim stat ribbon */}
-            <Reveal delay={0.22}>
-              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-[10px] border border-sage bg-surface px-3.5 py-2.5 sm:gap-x-5">
-                {RIBBON_STATS.map((s) => (
-                  <div key={s.label} className="flex items-baseline gap-1">
-                    <span className="font-display text-[13px] font-bold text-brand tabular-nums sm:text-[14px]">{s.value}</span>
-                    <span className="text-[11px] text-ink-body sm:text-[12px]">{s.label}</span>
-                  </div>
-                ))}
-                <div className="flex items-baseline gap-1">
-                  <span className="font-display text-[13px] font-bold text-brand tabular-nums sm:text-[14px]">Est. 2018</span>
-                </div>
-              </div>
-            </Reveal>
           </div>
 
-          {/* RIGHT — bookshelf photo as 100%-opacity clean banner */}
-          <Reveal delay={0.15} y={18}>
-            <PhotoBanner
-              src="/images/bg-bookshelf.png"
-              alt="A bright, sunlit wooden bookshelf filled with colorful books."
-              className="h-44 sm:h-64 lg:h-80"
-              priority
-            />
+          {/* RIGHT — bookshelf photo */}
+          <Reveal delay={0.15}>
+            <div className="relative h-48 w-full overflow-hidden rounded-xl border border-sage sm:h-72">
+              <Image
+                src="/images/bg-bookshelf.png"
+                alt="A bright, sunlit wooden bookshelf filled with colorful books."
+                fill
+                className="h-full w-full object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
           </Reveal>
         </div>
+
+        {/* Stat ribbon */}
+        <Reveal delay={0.22}>
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {RIBBON_STATS.map((s) => (
+              <div key={s.label} className="card-surface p-3 text-center">
+                <p className="font-display text-lg font-bold text-brand tabular-nums">
+                  {s.value}
+                </p>
+                <p className="mt-0.5 text-xs text-ink-body">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );
