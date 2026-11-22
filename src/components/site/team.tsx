@@ -3,53 +3,41 @@
 import Image from "next/image";
 import { Reveal, SectionHeader } from "./primitives";
 
-/* Section 04 · Our Team — compact portrait, founder bio. */
+/* Section 04 · Our Team — compact founder layout.
+   84px portrait beside name on mobile, bio below. */
 
 export function Team() {
   return (
-    <section id="team" className="anchor bg-bg-alt py-9 sm:py-14 md:py-16">
+    <section id="team" className="anchor bg-bg-alt">
       <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          index="04"
-          eyebrow="Who Runs the Club"
-          title="Curated by Real Readers"
-          className="mb-6 sm:mb-8"
-        />
+        <SectionHeader index="04" eyebrow="Who Runs the Club" title="Curated by Real Readers" className="mb-4 sm:mb-6" />
 
-        <div className="grid grid-cols-1 gap-5 sm:gap-8 lg:grid-cols-12 lg:items-center">
-          {/* Portrait — compact (120px mobile, 180px desktop) */}
-          <div className="flex justify-center lg:col-span-5">
-            <Reveal>
-              <div className="relative w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] lg:w-[200px] lg:h-[200px] overflow-hidden rounded-2xl border-2 border-sage shadow-[0_4px_16px_rgba(28,43,34,0.08)]">
+        <Reveal delay={0.05}>
+          {/* Mobile: portrait beside name/title, bio below */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-8">
+            <div className="flex items-center gap-3 sm:flex-col sm:items-start sm:gap-3">
+              <div className="relative h-[84px] w-[84px] shrink-0 overflow-hidden rounded-xl border border-sage object-cover shadow-sm sm:h-40 sm:w-40 lg:h-48 lg:w-48">
                 <Image
                   src="/images/waheed-heritage.jpg"
                   alt="Portrait of Prof. Waheed Heritage, Founder and Lead Curator of FatiBuClub"
                   fill
                   className="object-cover object-top"
-                  sizes="(min-width: 1024px) 200px, (min-width: 640px) 160px, 120px"
+                  sizes="(min-width: 640px) 192px, 84px"
                 />
               </div>
-            </Reveal>
-          </div>
+              <div className="sm:mt-1">
+                <h3 className="font-display text-[16px] font-bold text-ink sm:text-[20px] lg:text-[22px]">Prof. Waheed Heritage</h3>
+                <p className="text-brand text-[11px] font-semibold uppercase tracking-wide sm:text-[12px]">Founder &amp; Lead Curator</p>
+              </div>
+            </div>
 
-          {/* Copy */}
-          <div className="lg:col-span-7">
-            <Reveal delay={0.08}>
-              <h3 className="font-display text-[22px] sm:text-[28px] font-bold text-ink">
-                Prof. Waheed Heritage
-              </h3>
-              <p className="text-brand text-[13px] font-semibold uppercase tracking-wide mt-1">
-                Founder &amp; Lead Curator
+            <div className="flex-1">
+              <p className="text-[13.5px] leading-[1.55] text-ink-body sm:text-[15px] sm:leading-[1.6] sm:max-w-xl">
+                FatiBuClub is led by Prof. Waheed Heritage alongside volunteer readers who help screen submissions and host group discussions. Every book we consider is looked at by real people who care about story craft and honest conversation.
               </p>
-              <p className="text-[14px] sm:text-[15px] text-ink-body leading-[1.6] mt-3.5 max-w-xl">
-                FatiBuClub is led by Prof. Waheed Heritage alongside volunteer
-                readers who help screen submissions and host group discussions.
-                Every book we consider is looked at by real people who care
-                about story craft and honest conversation.
-              </p>
-            </Reveal>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

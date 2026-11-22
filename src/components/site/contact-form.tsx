@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Reveal, SectionHeader } from "./primitives";
 import { ArrowNudge } from "./ui-atoms";
-import { BackgroundImage } from "./background-image";
+import { PhotoBanner } from "./background-image";
 import { Loader2, Check } from "lucide-react";
 
 type FieldErrors = Record<string, string>;
@@ -74,15 +74,9 @@ export function ContactForm() {
   return (
     <section
       id="contact"
-      className="anchor bg-bg-alt relative overflow-hidden py-9 sm:py-14 md:py-16"
+      className="anchor bg-bg-alt"
     >
-      <BackgroundImage
-        src="/images/bg-community.png"
-        alt="A bright community of readers enjoying books together in a sunlit room."
-        tint="green"
-        overlay={60}
-      />
-      <div className="relative z-10 mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left — copy */}
           <div>
@@ -90,30 +84,38 @@ export function ContactForm() {
               index="07"
               eyebrow="Get in Touch"
               title="Share Your Book With FatiBuClub"
-              className="mb-5 sm:mb-6"
+              className="mb-3 sm:mb-4"
             />
-            <Reveal delay={0.06}>
-              <p className="max-w-2xl text-[15px] text-ink-body leading-[1.7]">
+            <Reveal delay={0.05}>
+              <p className="max-w-lg text-[13.5px] leading-[1.55] text-ink-body sm:text-[15px] sm:leading-[1.6]">
                 Writing an indie thriller, memoir, literary novel, or
                 historical story? Send us your book title, Goodreads or Amazon
                 link, and a quick note about what inspired it. We read every
                 message personally.
               </p>
             </Reveal>
+            {/* Community photo banner — 100% opacity */}
+            <Reveal delay={0.08}>
+              <PhotoBanner
+                src="/images/bg-community.png"
+                alt="A bright community of readers enjoying books together in a sunlit room."
+                className="mt-4 h-40 sm:h-56"
+              />
+            </Reveal>
           </div>
 
           {/* Right — form card */}
           <Reveal delay={0.1}>
-            <div className="card-surface rounded-2xl p-5 sm:p-6 lg:p-8 max-w-2xl mx-auto w-full">
+            <div className="card-surface p-4 sm:p-5 max-w-2xl mx-auto w-full">
               {status === "success" ? (
                 <SuccessState onReset={() => setStatus("idle")} />
               ) : (
                 <form
                   onSubmit={onSubmit}
                   noValidate
-                  className="flex flex-col gap-4"
+                  className="flex flex-col gap-2.5"
                 >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <Field
                       label="Author Name"
                       name="name"
@@ -155,7 +157,7 @@ export function ContactForm() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand text-white px-6 py-3 text-[14px] font-medium min-h-[44px] hover:bg-brand-dark transition-all disabled:opacity-60"
+                    className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand text-white px-4 py-2 text-[13px] font-medium h-[38px] hover:bg-brand-dark transition-all disabled:opacity-60"
                   >
                     {status === "loading" ? (
                       <>
@@ -210,10 +212,10 @@ function Field({
 }) {
   const id = `field-${name}`;
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1">
       <label
         htmlFor={id}
-        className="text-[12px] font-semibold uppercase tracking-wide text-ink-body"
+        className="text-[11px] font-semibold uppercase tracking-wide text-ink-body"
       >
         {label}
       </label>
@@ -226,12 +228,12 @@ function Field({
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          "h-11 w-full rounded-xl border border-sage bg-surface px-4 text-[15px] text-ink placeholder:text-ink-faint transition-all outline-none focus:border-brand focus:ring-2 focus:ring-brand/20",
+          "h-[38px] w-full rounded-[10px] border border-sage bg-surface px-3 text-[13.5px] text-ink placeholder:text-ink-faint transition-all outline-none focus:border-brand focus:ring-2 focus:ring-brand/20",
           error && "border-danger focus:border-danger focus:ring-danger/20"
         )}
       />
       {error && (
-        <span id={`${id}-error`} className="text-[12px] text-danger">
+        <span id={`${id}-error`} className="text-[11px] text-danger">
           {error}
         </span>
       )}
@@ -252,22 +254,22 @@ function FieldArea({
 }) {
   const id = `field-${name}`;
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1">
       <label
         htmlFor={id}
-        className="text-[12px] font-semibold uppercase tracking-wide text-ink-body"
+        className="text-[11px] font-semibold uppercase tracking-wide text-ink-body"
       >
         {label}
       </label>
       <textarea
         id={id}
         name={name}
-        rows={4}
+        rows={3}
         placeholder={placeholder}
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          "min-h-[110px] w-full resize-none rounded-xl border border-sage bg-surface px-4 py-3 text-[15px] text-ink placeholder:text-ink-faint transition-all outline-none focus:border-brand focus:ring-2 focus:ring-brand/20",
+          "w-full resize-none rounded-[10px] border border-sage bg-surface px-3 py-2 text-[13.5px] text-ink placeholder:text-ink-faint transition-all outline-none focus:border-brand focus:ring-2 focus:ring-brand/20",
           error && "border-danger focus:border-danger focus:ring-danger/20"
         )}
       />

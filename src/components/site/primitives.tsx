@@ -169,24 +169,14 @@ export function SectionHeader({
   align?: "left" | "center";
 }) {
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-2.5",
-        align === "center" && "items-center text-center",
-        className
-      )}
-    >
-      <Reveal className="flex items-center gap-2.5">
-        {index && (
-          <span className="font-display text-[11px] font-semibold text-brand tabular-nums">
-            {index}
-          </span>
-        )}
-        {index && <span className="h-px w-7 bg-sage-border" />}
+    <div className={cn("flex flex-col gap-2", align === "center" && "items-center text-center", className)}>
+      <Reveal className="flex items-center gap-2">
+        {index && <span className="font-display text-[11px] font-semibold text-brand tabular-nums">{index}</span>}
+        {index && <span className="h-px w-6 bg-sage-border" />}
         <span className="eyebrow !text-[11px]">{eyebrow}</span>
       </Reveal>
-      <Reveal delay={0.05}>
-        <h2 className="font-display font-semibold text-ink tracking-tight text-[20px] leading-[1.2] sm:text-[clamp(1.25rem,3vw,2.125rem)]">
+      <Reveal delay={0.04}>
+        <h2 className="font-display font-semibold text-ink tracking-tight text-[20px] leading-[1.25] sm:text-[clamp(1.25rem,3vw,2.125rem)]">
           {title}
         </h2>
       </Reveal>

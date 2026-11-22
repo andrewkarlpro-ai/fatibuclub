@@ -119,6 +119,35 @@
 }
 
 /* ===========================================================
+   Mobile-first compact sizing (< 640px)
+   Forces tight editorial scale, overrides oversized defaults.
+   =========================================================== */
+@media (max-width: 639px) {
+  html {
+    font-size: 15px;
+  }
+  body {
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  /* Force sections to compact vertical padding */
+  section {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+  }
+  /* Hero gets its own padding handled inline, but cap min-height */
+  #top {
+    min-height: auto !important;
+    padding-top: 80px !important;
+    padding-bottom: 24px !important;
+  }
+  /* Eyebrow / labels: 11px on mobile */
+  .eyebrow {
+    font-size: 11px !important;
+  }
+}
+
+/* ===========================================================
    Utilities & helpers
    =========================================================== */
 @layer utilities {
@@ -179,12 +208,12 @@
     scroll-margin-top: 80px;
   }
 
-  /* Standard card surface — white with sage border + subtle shadow (compact) */
+  /* Standard card surface — white with sage border + subtle shadow (compact, 10px radius) */
   .card-surface {
     background: var(--color-surface);
     border: 1px solid var(--color-sage-border);
     box-shadow: var(--shadow-card);
-    border-radius: 12px;
+    border-radius: 10px;
   }
 
   /* Animated underline link */
