@@ -13,11 +13,11 @@ const NAV = [
   { label: "How It Works", href: "#how-it-works" },
   { label: "Reading Shelf", href: "#reading-shelf" },
   { label: "Our Team", href: "#team" },
-  { label: "Transparency", href: "#transparency" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 
-const SPY_IDS = ["about", "how-it-works", "reading-shelf", "team", "transparency", "contact"];
+const SPY_IDS = ["about", "how-it-works", "reading-shelf", "team", "faq", "contact"];
 
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);

@@ -1,16 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Card, PillLink, ArrowNudge } from "./ui-atoms";
 import { Reveal } from "./primitives";
+import { BackgroundImage } from "./background-image";
 
-/* ============================================================
-   Hero — bright, airy, welcoming. Light bg only.
-   No background images, no dark theme, no avatars.
-   Left = copy. Right = compact floating stats card.
-   ============================================================ */
+/* Hero — bright, airy, welcoming with an animated bookshelf background.
+   Parallax on the bg image, floating stats card, staggered copy reveals. */
 
 const CIRCLE_STATS: { value: string; label: string }[] = [
   { value: "240", label: "Community Members" },
@@ -24,18 +22,27 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="bg-bg relative overflow-hidden pt-28 sm:pt-32 pb-12 sm:pb-16"
+      className="relative overflow-hidden pt-28 sm:pt-32 pb-12 sm:pb-16"
     >
-      {/* soft ambient sage glow — keeps the section bright, not flat */}
+      {/* Animated bookshelf background with parallax */}
+      <BackgroundImage
+        src="/images/bg-bookshelf.png"
+        alt="A bright, sunlit wooden bookshelf filled with colorful books."
+        tint="warm"
+        overlay={88}
+        priority
+      />
+
+      {/* Soft ambient glows for depth */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
         <div className="absolute -right-[12%] -top-[10%] h-[460px] w-[460px] rounded-full bg-sage/70 blur-3xl" />
-        <div className="absolute -left-[10%] bottom-[6%] h-[360px] w-[360px] rounded-full bg-bg-alt blur-3xl" />
+        <div className="absolute -left-[10%] bottom-[6%] h-[360px] w-[360px] rounded-full bg-sunshine/60 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-[1200px] px-5 sm:px-8">
+      <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-12">
           {/* LEFT — copy */}
           <div className="flex flex-col">
@@ -46,7 +53,7 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={0.06}>
-              <h1 className="mt-5 font-display font-semibold text-ink tracking-tight text-[28px] leading-[1.15] sm:text-[clamp(1.75rem,4vw,3rem)] sm:leading-[1.12]">
+              <h1 className="mt-5 font-display font-semibold text-ink tracking-tight text-[26px] leading-[1.2] sm:text-[clamp(1.75rem,4vw,3rem)] sm:leading-[1.15]">
                 Thoughtful Readers for Independent Books Worth Talking About.
               </h1>
             </Reveal>

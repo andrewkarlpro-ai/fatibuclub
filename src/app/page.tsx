@@ -6,6 +6,7 @@ import { HowItWorks } from "@/components/site/how-it-works";
 import { ReadingShelf } from "@/components/site/reading-shelf";
 import { Team } from "@/components/site/team";
 import { Transparency } from "@/components/site/transparency";
+import { Faq } from "@/components/site/faq";
 import { ContactForm } from "@/components/site/contact-form";
 import { Footer } from "@/components/site/footer";
 
@@ -21,6 +22,7 @@ export default function Home() {
         <ReadingShelf />
         <Team />
         <Transparency />
+        <Faq />
         <ContactForm />
       </main>
       <Footer />

@@ -11,6 +11,7 @@ const FOOTER_NAV = [
   { label: "Reading Shelf", href: "#reading-shelf" },
   { label: "Our Team", href: "#team" },
   { label: "Transparency", href: "#transparency" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 

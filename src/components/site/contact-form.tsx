@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Reveal, SectionHeader } from "./primitives";
 import { ArrowNudge } from "./ui-atoms";
+import { BackgroundImage } from "./background-image";
 import { Loader2, Check } from "lucide-react";
 
 type FieldErrors = Record<string, string>;
@@ -73,9 +74,15 @@ export function ContactForm() {
   return (
     <section
       id="contact"
-      className="anchor bg-bg-alt py-12 sm:py-16 md:py-18"
+      className="anchor bg-bg-alt relative overflow-hidden py-12 sm:py-16 md:py-18"
     >
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+      <BackgroundImage
+        src="/images/bg-community.png"
+        alt="A bright community of readers enjoying books together in a sunlit room."
+        tint="green"
+        overlay={88}
+      />
+      <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left — copy */}
           <div>

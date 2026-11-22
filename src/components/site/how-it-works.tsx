@@ -8,6 +8,7 @@ import {
   StaggerItem,
 } from "./primitives";
 import { Card } from "./ui-atoms";
+import { BackgroundImage } from "./background-image";
 
 /* ------------------------------------------------------------------ */
 /*  Section 4 · How It Works                                           */
@@ -48,7 +49,13 @@ export function HowItWorks() {
       id="how-it-works"
       className="anchor bg-bg-alt relative overflow-hidden py-12 sm:py-16 md:py-18"
     >
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+      <BackgroundImage
+        src="/images/bg-reading.png"
+        alt="Warm close-up of hands holding an open book in soft sunlight."
+        tint="warm"
+        overlay={90}
+      />
+      <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
         <SectionHeader
           index="02"
           eyebrow="How Reading Circles Work"

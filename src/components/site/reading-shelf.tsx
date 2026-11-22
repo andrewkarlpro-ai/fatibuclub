@@ -66,9 +66,9 @@ export function ReadingShelf() {
   return (
     <section
       id="reading-shelf"
-      className="anchor bg-bg py-12 sm:py-16 md:py-18"
+      className="anchor bg-sunshine py-12 sm:py-16 md:py-18 relative overflow-hidden"
     >
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
+      <div className="relative z-10 mx-auto max-w-[1200px] px-5 sm:px-8">
         <SectionHeader
           index="03"
           eyebrow="Reading Shelf"

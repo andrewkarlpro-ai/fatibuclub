@@ -20,6 +20,9 @@
   --color-ink-body: #46584e;      /* muted charcoal (body copy) */
   --color-ink-faint: #7a8a82;      /* faint muted text */
   --color-cream: #f4d77a;          /* warm cream (retained for occasional accent) */
+  --color-sunshine: #fef3c7;      /* soft warm yellow for section backgrounds */
+  --color-sunshine-deep: #fde68a; /* deeper warm yellow */
+  --color-sunshine-border: #fcd34d; /* yellow border accent */
   --color-line: #d1e5d8;           /* default border = sage */
   --color-line-strong: #b8d4c2;    /* stronger sage border */
   --color-danger: #c0392b;
@@ -158,8 +161,17 @@
   .bg-bg-alt {
     background-color: var(--color-bg-alt);
   }
+  .bg-sunshine {
+    background-color: var(--color-sunshine);
+  }
+  .bg-sunshine-deep {
+    background-color: var(--color-sunshine-deep);
+  }
   .border-sage {
     border-color: var(--color-sage-border);
+  }
+  .border-sunshine {
+    border-color: var(--color-sunshine-border);
   }
 
   /* Section anchor offset for sticky nav */
@@ -219,6 +231,13 @@
   .animate-float {
     animation: float-y 6s ease-in-out infinite;
   }
+  @keyframes float-y-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .animate-float-slow {
+    animation: float-y-slow 9s ease-in-out infinite;
+  }
 
   /* Pulse dot */
   @keyframes pulse-ring {
@@ -244,6 +263,34 @@
   }
   .animate-scroll-cue {
     animation: scroll-cue 1.8s ease-in-out infinite;
+  }
+
+  /* Gradient shift — animated brand gradient for accents */
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  /* Slow spin — for decorative rings */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+
+  /* Shimmer — for subtle highlight sweeps */
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
   }
 }
 
