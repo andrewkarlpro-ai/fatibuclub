@@ -26,7 +26,7 @@ export function About() {
           <Reveal delay={0.1}>
             <p className="mt-3 text-[13px] leading-relaxed text-ink-body sm:text-base">
               Thousands of remarkable independent books get buried before the
-              right readers ever find them. Since 2018, FatiBuClub has been a
+              right readers ever find them. Since 2015, FatiBuClub has been a
               welcoming corner of the internet built for readers who love slowing
               down, reading closely, and talking through stories together.
               Whether it is a tense thriller, a moving memoir, or sweeping

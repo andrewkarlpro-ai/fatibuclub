@@ -39,7 +39,7 @@ export function Navbar() {
             <span className="flex flex-col leading-none">
               <span className="text-sm font-bold text-ink">FatiBuClub</span>
               <span className="mt-0.5 text-[10px] uppercase tracking-wide text-ink-faint">
-                Private Reading Society · Est. 2018
+                Private Reading Society · Est. 2015
               </span>
             </span>
           </a>

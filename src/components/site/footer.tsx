@@ -73,7 +73,7 @@ export function Footer() {
       <div className="border-t border-sage">
         <div className="mx-auto max-w-5xl px-3.5 sm:px-6 py-4 text-center">
           <p className="text-xs text-ink-faint">
-            © 2018–2026 FatiBuClub. All Rights Reserved.
+            © 2015–2026 FatiBuClub. All Rights Reserved.
           </p>
         </div>
       </div>

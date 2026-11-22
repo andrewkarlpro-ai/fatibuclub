@@ -38,7 +38,7 @@ export function Logo({
         </span>
         {showTagline && (
           <span className="mt-0.5 text-[10px] uppercase tracking-[0.14em] text-ink-faint font-medium">
-            Private Reading Society · Est. 2018
+            Private Reading Society · Est. 2015
           </span>
         )}
       </span>

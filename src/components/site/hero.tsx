@@ -8,7 +8,7 @@ const RIBBON_STATS: { value: string; label: string }[] = [
   { value: "1,240", label: "Community Members" },
   { value: "450", label: "Active Readers" },
   { value: "150", label: "Avg Readers Per Book" },
-  { value: "Est. 2018", label: "Since 2018" },
+  { value: "Est. 2015", label: "Since 2015" },
 ];
 
 export function Hero() {
@@ -21,7 +21,7 @@ export function Hero() {
         <div className="max-w-lg">
           <Reveal>
             <span className="eyebrow text-[10px] sm:text-[11px]">
-              FatiBuClub · Private Indie Reading Society · Est. 2018
+              FatiBuClub · Private Indie Reading Society · Est. 2015
             </span>
           </Reveal>
 
