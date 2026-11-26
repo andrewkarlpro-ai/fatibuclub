@@ -5,9 +5,9 @@ import { PillLink, ArrowNudge } from "./ui-atoms";
 import { SectionBackground } from "./section-background";
 
 const RIBBON_STATS: { value: string; label: string }[] = [
-  { value: "1,240", label: "Community Members" },
-  { value: "450", label: "Active Readers" },
-  { value: "150", label: "Avg Readers Per Book" },
+  { value: "347", label: "Community Members" },
+  { value: "153", label: "Active Readers" },
+  { value: "65", label: "Avg Readers Per Book" },
   { value: "Est. 2015", label: "Since 2015" },
 ];
 

@@ -11,14 +11,14 @@ import { SectionBackground } from "./section-background";
 const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 const MONTHS = [
-  { name: "Dec 2026", startsOn: 1, days: 31, picks: [8, 22] },
-  { name: "Jan 2027", startsOn: 4, days: 31, picks: [12, 26] },
-  { name: "Feb 2027", startsOn: 0, days: 28, picks: [9] },
+  { name: "Nov 2026", startsOn: 6, days: 30, picks: [30] },
+  { name: "Dec 2026", startsOn: 1, days: 31, picks: [14, 28] },
+  { name: "Jan 2027", startsOn: 4, days: 31, picks: [15, 29] },
 ] as const;
 
 const STEPS = [
   { title: "Book Review & Selection", body: "We look at each indie book to see if it matches what our readers enjoy discussing. Submitting your book for consideration is completely free." },
-  { title: "Reader Sign-Up", body: "When a title is selected, interested members sign up to join that book's reading circle—averaging around 150 readers, or a smaller group if an author prefers." },
+  { title: "Reader Sign-Up", body: "When a title is selected, interested members sign up to join that book's reading circle—averaging around 65 readers, or a smaller group if an author prefers." },
   { title: "Group Reading & Discussion", body: "Readers move through the book together in our private discussion channels, sharing reactions, favorite passages, and questions." },
   { title: "Honest Goodreads Reviews", body: "After finishing the book and wrapping up the discussion, readers share their honest reviews on Goodreads to help future readers discover the story." },
 ] as const;

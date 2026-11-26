@@ -23,7 +23,7 @@ const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "How many readers will read my book?",
-    a: "Our reading circles average around 150 readers per book, but we can arrange a smaller group if you prefer a more intimate discussion. We'll discuss the group size with you by email before anything starts.",
+    a: "Our community has 347 members, with 153 active readers joining monthly circles. Each selected book averages around 65 readers, but we can arrange a smaller group if you prefer a more intimate discussion. We'll discuss the group size with you by email before anything starts.",
   },
   {
     q: "What genres do you accept?",

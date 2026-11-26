@@ -7,19 +7,19 @@ type Stat = { value: string; label: string; sub: string };
 
 const STATS: Stat[] = [
   {
-    value: "1,240",
+    value: "347",
     label: "Community Members",
     sub: "Readers from around the world who love discovering indie books.",
   },
   {
-    value: "450",
+    value: "153",
     label: "Active Readers",
     sub: "Members actively joining monthly reading circles and discussions.",
   },
   {
-    value: "150",
+    value: "65",
     label: "Average Readers Per Book",
-    sub: "Split into focused discussion circles so every voice is heard.",
+    sub: "Organized into focused discussion circles so every voice is heard.",
   },
   {
     value: "1–2",

@@ -16,7 +16,7 @@ export function Team() {
             <div className="relative w-16 h-16 sm:w-28 sm:h-28 rounded-xl overflow-hidden shrink-0 border border-sage">
               <Image
                 src="/images/waheed-heritage.jpg"
-                alt="Portrait of Prof. Waheed Heritage, Founder and Lead Curator of FatiBuClub"
+                alt="Portrait of Waheed Heritage, Founder and Lead Curator of FatiBuClub"
                 fill
                 className="object-cover object-top"
                 sizes="(min-width: 640px) 112px, 80px"
@@ -24,10 +24,10 @@ export function Team() {
             </div>
 
             <div>
-              <h3 className="font-display text-lg sm:text-xl font-bold text-ink">Prof. Waheed Heritage</h3>
+              <h3 className="font-display text-lg sm:text-xl font-bold text-ink">Waheed Heritage</h3>
               <p className="text-brand text-xs font-semibold uppercase tracking-wide mt-0.5">Founder &amp; Lead Curator</p>
               <p className="mt-3 text-[13px] text-ink-body leading-relaxed max-w-xl sm:text-sm">
-                FatiBuClub is led by Prof. Waheed Heritage alongside volunteer readers who help screen submissions and host group discussions. Every book we consider is looked at by real people who care about story craft and honest conversation.
+                FatiBuClub is led by Waheed Heritage alongside volunteer readers who help screen submissions and host group discussions. Every book we consider is looked at by real people who care about story craft and honest conversation.
               </p>
             </div>
           </div>
